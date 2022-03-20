@@ -2,11 +2,18 @@
   "name": "sahara",
   "version": "1.0.0",
   "description": "sahara ecommerce backend",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node src/server.js",
+    "nodemon": "nodemon src/server.js"
   },
   "author": "Abhishek Poojary",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.7",
+    "nodemon": "^2.0.15"
+  }
 }
