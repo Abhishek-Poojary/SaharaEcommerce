@@ -1,13 +1,14 @@
 const fs = require( 'fs' );
+const path = require('path'); 
 
 let errorLogger = ( err, req, res, next ) => {
-    fs.appendFile( './ErrorLogger.txt', err.stack + "\n", ( error ) => {
-        if( error ) console.log( "logging error failed" );
-    } );
-    if( err.status ) res.status( err.status );
-    else res.status( 500 );
-    res.json( { "message": err.message } )
-    next();
+    let reqPath = path.join(__dirname, '../');
+
+    fs.appendFile(reqPath + 'ErrorLogger.txt',  err.stack + "\n", function(err) {
+        if(err) throw err;
+    });
+
+   
 }
 
 module.exports = errorLogger;
