@@ -8,6 +8,7 @@ const HandleError = require( "./middleware/handleError");
 DatabaseConnection();
 
 const userRoute= require("./routes/userRoute");
+const productRoute=require("./routes/productRoute");
 const app=express();
 
 
@@ -17,8 +18,8 @@ app.use(MyRequestLogger);
 app.use(express.json());  // 
 app.use(cookieParser());  // for using cookies 
 
-app.use("/user",userRoute);
-
+app.use("/api/v1",userRoute);
+app.use("/api/v1",productRoute);
 
 
 app.use(HandleError)

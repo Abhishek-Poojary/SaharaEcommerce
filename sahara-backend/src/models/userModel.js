@@ -43,4 +43,8 @@ userSchema.methods.getJsonWebToken=function(){
         expiresIn:process.env.JSONWEBTOKEN_EXPIRE
     })
 }
+
+userSchema.methods.comparePasswords= async function(data){
+    return await bcryptjs.compare(data,this.password);
+}
 module.exports=mongoose.model("User",userSchema);
