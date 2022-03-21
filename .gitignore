@@ -1,4 +1,5 @@
 sahara-backend/notes
+sahara-backend/.env
 sahara-backend/node_modules
 sahara-backend/src/ErrorLogger.txt
 sahara-backend/src/RequestLogger.txt
