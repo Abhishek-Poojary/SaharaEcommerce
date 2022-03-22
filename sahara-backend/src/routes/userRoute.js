@@ -1,7 +1,8 @@
 const express=require("express");
 const { createUser, logoutUser, userLogin,
      updatePassword, getLoggedInUserDetails, 
-     updateUserProfile, getAllUsers } = require("../controllers/userController");
+     updateUserProfile, getAllUsers, getSingleUserDetails,
+      updateUserRole,deleteUser} = require("../controllers/userController");
 const {userAuthentication, roleAuthentication }=require("../middleware/authenticate")
 
 
@@ -20,6 +21,11 @@ router.route("/profile/view").get(userAuthentication,getLoggedInUserDetails);
 
 router.route("/profile/update").put(userAuthentication,updateUserProfile);
 
-router.route("/admin/view/users").get(userAuthentication,roleAuthentication("admin"),getAllUsers);
+router.route("/admin/users/all").get(userAuthentication,roleAuthentication("admin"),getAllUsers);
+
+router.route("/admin/users/:id")
+.get(userAuthentication,roleAuthentication("admin"),getSingleUserDetails)
+.put(userAuthentication,roleAuthentication("admin"),updateUserRole)
+.delete(userAuthentication,roleAuthentication("admin"),deleteUser);
 
 module.exports=router;

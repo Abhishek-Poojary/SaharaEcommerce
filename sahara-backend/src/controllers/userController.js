@@ -2,6 +2,7 @@ const User =require("../models/userModel")
 const createToken=require("../utilities/jwtToken");
 const catchAsyncError=require("../middleware/catchAsyncError");
 const ErrorHandler = require("../utilities/ErrorHandler");
+const { findById } = require("../models/userModel");
 
 
 exports.createUser=catchAsyncError(async(req,res,next)=>{
@@ -119,4 +120,59 @@ exports.getAllUsers=catchAsyncError(async(req,res,next)=>{
             users
         }
     )
+})
+
+
+exports.getSingleUserDetails=catchAsyncError(async (req,res,next)=>{
+
+    const user=await User.findById(req.params.id);
+
+    if(!user){
+        return next(new ErrorHandler("Invalid User id",400));
+    }
+
+
+    res.status(200).json({
+        success:true,
+        user
+    })
+
+})
+
+
+exports.updateUserRole=catchAsyncError(async(req,res,next)=>{
+
+    const user = await User.findById(req.params.id);
+
+    if(!user){
+        return next(new ErrorHandler("Invalid User id",400));
+    }
+
+    user.userRole="admin";
+
+    await user.save();
+
+    res.status(200).json({
+        success:true,
+    })
+})
+
+
+
+exports.deleteUser=catchAsyncError(async(req,res,next)=>{
+
+    const user=await User.findById(req.params.id);
+
+    if(!user){
+        return next(new ErrorHandler("Invalid User id",400));
+    };
+
+    await user.remove();
+
+
+
+    res.status(200).json({
+        success:true,
+        message:"User deleted"
+    })
 })
