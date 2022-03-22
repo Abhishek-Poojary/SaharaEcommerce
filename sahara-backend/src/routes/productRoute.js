@@ -1,10 +1,20 @@
 const express=require("express");
-const { addProduct } = require("../controllers/productController");
-const { userAuthentication } = require("../middleware/authenticate");
+const { addProduct, getAllProducts, getProductByTags,
+     getSingleProductDetail, updateProduct, deleteProduct } = require("../controllers/productController");
+const { userAuthentication, roleAuthentication } = require("../middleware/authenticate");
 const router= express.Router();
 
 
 router.route("/admin/product/new").post(userAuthentication,addProduct);
+
+router.route("/products/all").get(getAllProducts);
+
+router.route("/products/tag").get(getProductByTags);
+
+router.route("/product/:id").get(getSingleProductDetail);
+
+router.route("/admin/product/:id").put(userAuthentication,roleAuthentication("admin"),updateProduct)
+.delete(userAuthentication,roleAuthentication("admin"),deleteProduct)
 
 
 module.exports=router
