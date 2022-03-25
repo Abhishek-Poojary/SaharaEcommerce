@@ -1,0 +1,21 @@
+.customGradient{
+    background: rgb(36,27,0);
+    background: linear-gradient(90deg, rgba(36,27,0,1) 0%, rgba(9,121,103,1) 0%, rgba(0,255,179,1) 100%);
+    height: 30rem;
+}
+
+.customTitle{
+    text-align: center;
+    width: 20vmax;
+    margin: 5vmax auto;
+}
+
+.customContainer{
+    display: flex;
+    margin: 2vmax auto;
+    width: 80vw;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    
+}
