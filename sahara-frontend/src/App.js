@@ -6,7 +6,7 @@ import Footer from './component/common/Footer/Footer';
 import Home from './component/Home/Home'
 import Product from './component/common/Product/Product'
 import Products from "./component/Products/Products"
-import Search from './component/Search/Search'
+
 
 
 function App() {
