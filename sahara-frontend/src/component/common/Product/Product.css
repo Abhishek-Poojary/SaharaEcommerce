@@ -1,0 +1,70 @@
+.customContainer{
+    display: flex;
+    margin: 2vmax auto;
+    width: 80vw;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: aliceblue;
+    
+}
+
+.customDisplay{
+    text-align: left;
+}
+
+.customImage{
+    width: 100% ;
+}
+
+.customButton-1-1{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .customInput{
+    display: inline-flex;
+  }
+
+  .customButton-1-2{
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px ;
+    cursor: pointer;
+  }
+  .customButton-1-3{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+@media only screen  and (max-width:766px){
+  .customContainer{
+      width: 70%;
+  }
+}
+
+
+@media only screen  and (max-width:580px){
+    .customContainer{
+        width: 80%;
+    }
+  }

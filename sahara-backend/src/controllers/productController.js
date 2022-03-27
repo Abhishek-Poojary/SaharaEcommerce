@@ -21,14 +21,14 @@ exports.addProduct=catchAsyncError(async (req,res,next)=>{
 
 exports.getAllProducts=catchAsyncError(async(req,res,next)=>{
 
-    const limitNumberOfPages = 6;
+    const limitNumberOfPages = 8;
     const totalProducts=await Product.countDocuments();
     const searchapi =new Searchapi(Product.find(),req.query).Search().filter().pagination(limitNumberOfPages);
-    const product= await searchapi.query;
+    const products= await searchapi.query;
 
     res.status(200).json({
         success:true,
-        product,
+        products,
         totalProducts
     })
  

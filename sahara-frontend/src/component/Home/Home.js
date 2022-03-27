@@ -1,30 +1,16 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import './Home.css'
 import ProductCard from '../common/ProductCard/ProductCard'
-
-
+import { getAllProducts } from "../../actions/productAction";
+import {useSelector,useDispatch} from 'react-redux'
 
 const Home = () => {
-    const Product = [{
-        name: "Moto g5 s plus",
-        price: 31000,
-        _id: "hello",
-        images: [],
-        description: "good is the best in the market"
-    }, {
-        name: "Moto g5 s plus",
-        price: 31000,
-        _id: "hello",
-        images: [],
-        description: "good is the best in the market"
-    }, {
-        name: "Moto g5 s plus",
-        price: 31000,
-        _id: "hello",
-        images: [],
-        description: "good is the best in the market"
-    }
-    ]
+    const dispatch=useDispatch();
+    const {error,products,productsCount}=useSelector((state)=>state.products)
+    useEffect(()=>{
+        dispatch(getAllProducts());
+    },[])
+  
 
 
     return (
@@ -37,7 +23,7 @@ const Home = () => {
 
             <div className="customContainer" id="customContainer">
 
-                {Product && Product.map((product)=>(
+                {products && products.map((product)=>(
                      <ProductCard product={product}  key={product._id}/>
                 ))}
                
