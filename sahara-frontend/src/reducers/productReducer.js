@@ -18,7 +18,8 @@ export const allProductReducer = (state = { products: [] }, action) => {
         case REQUEST_FOR_ALL_PRODUCTS_SUCCESS:
             return {
                 products: action.payload.products,
-                productsCount: action.payload.totalProducts
+                productsCount: action.payload.totalProducts,
+                limitNumberOfPages:action.payload.limitNumberOfPages
             }
 
         case CLEAR_ERROR:

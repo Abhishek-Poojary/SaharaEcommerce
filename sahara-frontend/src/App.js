@@ -21,7 +21,7 @@ function App() {
 
           <Route exact path="/products" element={<Products />}/>
 
-          <Route  path="/products/:keyword" element={<Search />}/>
+          <Route  path="/products/:keyword" element={<Products />}/>
 
           
         </Routes>

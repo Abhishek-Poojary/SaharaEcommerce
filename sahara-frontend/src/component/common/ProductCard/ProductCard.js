@@ -9,7 +9,7 @@ const ProductCard = ({product}) => {
     return (
         <Link className="customLink" to={`/product/${product._id}`}>
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src="logo192.png" />
+                <Card.Img variant="top" src="https://media.geeksforgeeks.org/wp-content/uploads/20210425000233/test-300x297.png" />
                 <Card.Body>
                     <Card.Title className="customLink">{product.name}</Card.Title>
                     <Card.Text>

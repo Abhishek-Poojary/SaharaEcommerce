@@ -7,3 +7,26 @@
     max-width: 100%;
     
 }
+
+.customPagination{
+    display: flex;
+    justify-content: center;
+}
+
+.customMenu{
+    margin-left: 1vmax;
+    width: 10vmax;
+    position: absolute;
+    top: 10vmax;
+}
+
+
+@media only screen and (max-width:900px) {
+
+    .customMenu{
+      
+        width: 20vmax;
+        position: static;
+        margin: auto;
+    }
+}

@@ -5,10 +5,10 @@ import {useNavigate} from 'react-router-dom';
 
 
 
-const Header = ({}) => {
+const Header = () => {
     const navigate= useNavigate();
     const [keyword,setKeyword]=useState("");
-    console.log(keyword);
+   
     const submitSearch=(e)=>{
     e.preventDefault();
         if(keyword.trim()){

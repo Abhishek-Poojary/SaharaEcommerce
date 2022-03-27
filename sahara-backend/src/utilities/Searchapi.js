@@ -23,13 +23,16 @@ class Searchapi{
 
         const arr={...this.queryStr};
 
-        const key=["keyword","page","limit","tags"];
+        const key=["keyword","page","limit","tags","category"];
 
         key.forEach((key)=> delete arr[key]);
 
         let str=JSON.stringify(arr);
 
-        str=str.replace(/\b(gt| gte| lt| lte)\b/g, (key)=> `$${key}`);
+        str=str.replace(/\b(gt)\b/g, (key)=> `$${key}`);
+        str=str.replace(/\b(gte)\b/g, (key)=> `$${key}`);
+        str=str.replace(/\b(lte)\b/g, (key)=> `$${key}`);
+        str=str.replace(/\b(lt)\b/g, (key)=> `$${key}`);
 
         this.query= this.query.find(JSON.parse(str));
 

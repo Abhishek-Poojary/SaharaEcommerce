@@ -7,11 +7,13 @@ import {
 } from "../constants/ProductConstants"
 
 
-export const getAllProducts = () => async (dispatch) => {
+export const getAllProducts = (keyword="",currentPage=1,price=[0,70000]) => async (dispatch) => {
     try {
         dispatch({ type: REQUEST_FOR_ALL_PRODUCTS })
-
-        const { data } = await axios.get("/api/v1/products/all")
+        const link =`/api/v1/products/all?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`
+      
+    
+        const { data } = await axios.get(link)
 
         dispatch({ type: REQUEST_FOR_ALL_PRODUCTS_SUCCESS, payload: data })
 
