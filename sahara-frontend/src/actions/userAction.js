@@ -5,7 +5,8 @@ import {
     REQUEST_FOR_USER_LOGIN_SUCCESS,
     REQUEST_TO_REGISTER_USER, REQUEST_TO_REGISTER_USER_FAIL, REQUEST_TO_REGISTER_USER_SUCCESS,
     REQUEST_TO_LOAD_USER, REQUEST_TO_LOAD_USER_FAIL, REQUEST_TO_LOAD_USER_SUCCESS,
-    REQUEST_TO_LOGOUT_USER_FAIL,REQUEST_TO_LOGOUT_USER_SUCCESS
+    REQUEST_TO_LOGOUT_USER_FAIL,REQUEST_TO_LOGOUT_USER_SUCCESS,
+    REQUEST_TO_UPDATE_USER_PROFILE, REQUEST_TO_UPDATE_USER_PROFILE_FAIL, REQUEST_TO_UPDATE_USER_PROFILE_SUCCESS
 }
     from "../constants/UserConstants"
 
@@ -72,4 +73,22 @@ export const logoutUser=()=>async(dispatch)=>{
         dispatch({type:REQUEST_TO_LOGOUT_USER_FAIL,payload:error.response.data.message})
     }
 }
+
+
+export const userProfileUpdate = (userData) => async (dispatch) => {
+    try {
+
+        dispatch({ type: REQUEST_TO_UPDATE_USER_PROFILE })
+
+        const { data } = await axios.put(`/api/v1/profile/update`, userData)
+
+
+
+        dispatch({ type: REQUEST_TO_UPDATE_USER_PROFILE_SUCCESS, payload: data.success})
+    } catch (error) {
+        dispatch({ type: REQUEST_TO_UPDATE_USER_PROFILE_FAIL, payload: error.response.data.message })
+    }
+
+}
+
 

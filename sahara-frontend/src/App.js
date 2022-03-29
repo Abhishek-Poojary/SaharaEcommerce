@@ -11,6 +11,9 @@ import Register from "./component/Register/Register";
 import { useDispatch, useSelector } from "react-redux";
 import {loadUser}  from "./actions/userAction"
 import Profile from './component/Profile/Profile'
+import Protected from "./component/ProtectedRoute/Protected";
+import UpdateProfile from "./component/Profile/UpdateProfile";
+
 function App() {
   const dispatch = useDispatch();
   const {isAuthenticated,error,user} =useSelector((state)=>state.user)
@@ -36,7 +39,9 @@ function App() {
 
         <Route path="/register" element={<Register />} />
 
-        <Route path="/profile" element={<Profile/>} />
+        <Route exact  path="/profile" element={<Protected  > <Profile/></Protected>}/>
+
+        <Route exact  path="/profile/update" element={<Protected  > <UpdateProfile/></Protected>}/>
 
 
       </Routes>
