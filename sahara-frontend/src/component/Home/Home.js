@@ -9,7 +9,7 @@ const Home = () => {
     const {error,products,productsCount}=useSelector((state)=>state.products)
     useEffect(()=>{
         dispatch(getAllProducts());
-    },[])
+    },[dispatch])
   
 
 

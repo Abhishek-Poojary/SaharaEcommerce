@@ -1,0 +1,7 @@
+.customContainer-2-1-1{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80vmax;
+    justify-content: center;
+    margin: 2vmax auto;
+}

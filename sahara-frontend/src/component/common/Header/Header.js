@@ -1,15 +1,17 @@
 import React, { Fragment, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Nav, Container, FormControl, Button, Form } from 'react-bootstrap';
+import { Navbar, Nav, Container, FormControl, Button, Form ,NavDropdown } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import {logoutUser}  from "../../../actions/userAction"
 
 
 const Header = () => {
+    const dispatch=useDispatch();
+
     const navigate = useNavigate();
     const [keyword, setKeyword] = useState("");
-    const { isAuthenticated } = useSelector(state => state.user);
+    const { isAuthenticated,user } = useSelector(state => state.user);
 
     const submitSearch = (e) => {
         e.preventDefault();
@@ -20,6 +22,15 @@ const Header = () => {
             navigate(`/products`);
         }
     }
+
+
+    const logout=()=>{
+        dispatch(logoutUser());
+        navigate('/');
+    }
+
+
+
     return (
         <Fragment>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -30,7 +41,6 @@ const Header = () => {
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="/products">Products</Nav.Link>
-
                         </Nav>
                         <Form className="d-flex" onSubmit={submitSearch}>
                             <FormControl
@@ -41,17 +51,29 @@ const Header = () => {
                             />
                             <Button variant="outline-primary" type="submit">Search</Button>
                         </Form>
-                        {isAuthenticated ?(<Nav >
-                                <Nav.Link href="">Profile</Nav.Link>
+                        {isAuthenticated ? (<Nav >
+                         
+                            <NavDropdown title={user.name} >
+                                {user.userRole==="admin" ?  
+                                <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
+                                :[]
+                            }
+                                <NavDropdown.Item href="/profile">my Profile</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item href="/">Update Password</NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+                            </NavDropdown>
 
-                            </Nav>
+                        </Nav>
 
-                        ):( <Nav >
+                        ) : (<Nav >
                             <Nav.Link href="/login">Login</Nav.Link>
 
-                        </Nav>)}
-                            
-                  
+                        </Nav>
+                        )}
+
+
 
                     </Navbar.Collapse>
                 </Container>
