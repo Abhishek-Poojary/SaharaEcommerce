@@ -18,7 +18,7 @@ exports.createUser=catchAsyncError(async(req,res,next)=>{
 
 exports.userLogin=catchAsyncError(async(req,res,next)=>{
     const {emailId,password} =req.body;
-
+    
     if(!emailId || !password){
         return next(new ErrorHandler("Please enter your email & password",400));
     }

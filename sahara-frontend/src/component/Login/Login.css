@@ -1,0 +1,27 @@
+.customContainer-1{
+    display: flex;
+    margin: 2vmax auto;
+    padding: 4vmax;
+    width: 50vw;
+    border: solid 1px;
+    border-color: darkslategray;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: aliceblue;
+}
+
+.customForm{
+    width: 100%;
+}
+
+.customLink{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.customStyle{
+    text-decoration: none;
+}
+
+
