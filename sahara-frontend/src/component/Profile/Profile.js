@@ -21,7 +21,7 @@ const Profile = () => {
                     <div>
                         <Link to="/profile/update">Update profile</Link>
                         <br />
-                        <Link to="">Change Password</Link>
+                        <Link to="/profile/password/update">Change Password</Link>
                         <br />
                         <Link to="">Orders</Link>
                     </div>

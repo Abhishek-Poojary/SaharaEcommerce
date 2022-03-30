@@ -25,7 +25,7 @@ const UpdateProfile = () => {
         if (user) {
             setName(user.name);
             setEmail(user.emailId)
-            setPhoneNo(user.contactNumber)  //currently getting a error in here for setting the values 
+            setPhoneNo(user.contactNumber)  //showing error as we are using these in the form as values
         }
 
 

@@ -6,7 +6,8 @@ import {
     REQUEST_TO_REGISTER_USER, REQUEST_TO_REGISTER_USER_FAIL, REQUEST_TO_REGISTER_USER_SUCCESS,
     REQUEST_TO_LOAD_USER, REQUEST_TO_LOAD_USER_FAIL, REQUEST_TO_LOAD_USER_SUCCESS,
     REQUEST_TO_LOGOUT_USER_FAIL,REQUEST_TO_LOGOUT_USER_SUCCESS,
-    REQUEST_TO_UPDATE_USER_PROFILE, REQUEST_TO_UPDATE_USER_PROFILE_FAIL, REQUEST_TO_UPDATE_USER_PROFILE_SUCCESS
+    REQUEST_TO_UPDATE_USER_PROFILE, REQUEST_TO_UPDATE_USER_PROFILE_FAIL, REQUEST_TO_UPDATE_USER_PROFILE_SUCCESS,
+    REQUEST_TO_UPDATE_USER_PASSWORD, REQUEST_TO_UPDATE_USER_PASSWORD_FAIL, REQUEST_TO_UPDATE_USER_PASSWORD_SUCCESS
 }
     from "../constants/UserConstants"
 
@@ -90,5 +91,22 @@ export const userProfileUpdate = (userData) => async (dispatch) => {
     }
 
 }
+
+
+export const userPasswordUpdate =(userData)=>async(dispatch)=>{
+    try{
+        dispatch({ type: REQUEST_TO_UPDATE_USER_PASSWORD })
+
+        const { data } = await axios.put(`/api/v1/password/update`, userData)
+
+
+
+        dispatch({ type: REQUEST_TO_UPDATE_USER_PASSWORD_SUCCESS, payload: data.success})
+    }catch(error){
+        dispatch({ type: REQUEST_TO_UPDATE_USER_PASSWORD_FAIL, payload: error.response.data.message })
+    }
+}
+
+
 
 

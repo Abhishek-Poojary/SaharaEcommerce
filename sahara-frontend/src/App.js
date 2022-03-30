@@ -13,6 +13,7 @@ import {loadUser}  from "./actions/userAction"
 import Profile from './component/Profile/Profile'
 import Protected from "./component/ProtectedRoute/Protected";
 import UpdateProfile from "./component/Profile/UpdateProfile";
+import UpdatePassword from "./component/Profile/UpdatePassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function App() {
 
         <Route exact  path="/profile/update" element={<Protected  > <UpdateProfile/></Protected>}/>
 
+        <Route exact path="/profile/password/update" element={<Protected  > <UpdatePassword/></Protected>}/>
 
       </Routes>
       <Footer />

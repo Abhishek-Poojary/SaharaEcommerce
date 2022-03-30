@@ -6,7 +6,8 @@ import {
     REQUEST_TO_LOAD_USER, REQUEST_TO_LOAD_USER_FAIL, REQUEST_TO_LOAD_USER_SUCCESS,
     REQUEST_TO_LOGOUT_USER_FAIL, REQUEST_TO_LOGOUT_USER_SUCCESS,
     REQUEST_TO_RESET_PROFILE,
-     REQUEST_TO_UPDATE_USER_PROFILE, REQUEST_TO_UPDATE_USER_PROFILE_FAIL, REQUEST_TO_UPDATE_USER_PROFILE_SUCCESS
+    REQUEST_TO_UPDATE_USER_PROFILE, REQUEST_TO_UPDATE_USER_PROFILE_FAIL, REQUEST_TO_UPDATE_USER_PROFILE_SUCCESS,
+    REQUEST_TO_UPDATE_USER_PASSWORD, REQUEST_TO_UPDATE_USER_PASSWORD_FAIL, REQUEST_TO_UPDATE_USER_PASSWORD_SUCCESS
 }
     from "../constants/UserConstants"
 
@@ -57,30 +58,33 @@ export const userLoginReducer = (state = { user: {} }, action) => {
 
 export const updateUserProfileReducer = (state = {}, action) => {
     switch (action.type) {
+        case REQUEST_TO_UPDATE_USER_PASSWORD:
         case REQUEST_TO_UPDATE_USER_PROFILE:
             return {
                 ...state,
-                loading:true
+                loading: true
 
             }
+        case REQUEST_TO_UPDATE_USER_PASSWORD_FAIL:
         case REQUEST_TO_UPDATE_USER_PROFILE_FAIL:
             return {
                 ...state,
-                loading:false,
-                error:action.payload,
+                loading: false,
+                error: action.payload,
             }
+        case REQUEST_TO_UPDATE_USER_PASSWORD_SUCCESS:
         case REQUEST_TO_UPDATE_USER_PROFILE_SUCCESS:
             return {
                 ...state,
-                loading:false,
-                updateStatus:action.payload
-            }   
-        case REQUEST_TO_RESET_PROFILE:
-            return{
-                ...state,
-                updateStatus:false
+                loading: false,
+                updateStatus: action.payload
             }
-        default:return state;
+        case REQUEST_TO_RESET_PROFILE:
+            return {
+                ...state,
+                updateStatus: false
+            }
+        default: return state;
 
     }
 }
