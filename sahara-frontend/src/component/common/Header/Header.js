@@ -60,7 +60,7 @@ const Header = () => {
                             }
                                 <NavDropdown.Item href="/profile">my Profile</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item href="/">Update Password</NavDropdown.Item>
+                                <NavDropdown.Item href="/cart">Cart</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
                             </NavDropdown>

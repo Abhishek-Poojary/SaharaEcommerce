@@ -1,0 +1,13 @@
+.customcontainer-card{
+    display: flex;
+    width: 80vmax;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 2vmax auto;
+    background-color: aqua;
+}
+
+.customInput{
+    height: 10%;
+    margin-left: 2vmax;
+  }
