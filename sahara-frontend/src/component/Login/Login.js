@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {userLogin} from '../../actions/userAction'
 const Login = () => {
     const dispatch = useDispatch();
+
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [emailError, setEmailError] = useState();
@@ -23,12 +24,13 @@ const Login = () => {
         
     }
 
-
+    const newPath =location.search ? location.search.split("=")[1]: "/profile"
+  
     useEffect(()=>{
         if(isAuthenticated){
-            navigate('/');
+            navigate(`/${newPath}`);
         }
-    },[dispatch,error,isAuthenticated,navigate]);
+    },[dispatch,error,isAuthenticated,newPath]);
 
     const verifyEmail = (event) => {
         let eIdregex = /^[a-z]+[@][a-z]+\.[com]+$/;

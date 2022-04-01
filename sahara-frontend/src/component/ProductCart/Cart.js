@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import CartCard from './CartCard'
 import './Cart.css'
 import { deleteFromCart, userAddToCart } from "../../actions/cartAction";
+import {useNavigate} from "react-router-dom"
+import { Button } from 'react-bootstrap';
 
 const Cart = () => {
-
+    const navigate=useNavigate();
     const dispatch = useDispatch();
     const { cartItems } = useSelector((state) => state.cart)
 
@@ -26,6 +28,10 @@ const Cart = () => {
     const removeItem=(id)=>{
 
         dispatch(deleteFromCart(id));
+    }
+
+    const checkout=()=>{
+        navigate("/login?redirect=shipping")
     }
     return (
         <Fragment>
@@ -57,7 +63,7 @@ const Cart = () => {
                 (sum, item) => sum + item.count * item.price,
                 0
             )}`}</p>
-
+            <Button className="primary" onClick={checkout}>Checkout </Button>
         </Fragment>
     )
 }

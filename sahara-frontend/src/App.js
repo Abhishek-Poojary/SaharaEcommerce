@@ -15,6 +15,7 @@ import Protected from "./component/ProtectedRoute/Protected";
 import UpdateProfile from "./component/Profile/UpdateProfile";
 import UpdatePassword from "./component/Profile/UpdatePassword";
 import Cart from "./component/ProductCart/Cart";
+import Shipping from './component/ProductCart/Shipping'
 function App() {
   const dispatch = useDispatch();
   const {isAuthenticated,error,user} =useSelector((state)=>state.user)
@@ -46,7 +47,9 @@ function App() {
 
         <Route exact path="/profile/password/update" element={<Protected  > <UpdatePassword/></Protected>}/>
 
-        <Route exact path="/cart" element={<Protected  > <Cart/></Protected>}/>
+        <Route exact path="/cart" element={ <Cart/>}/>
+
+        <Route exact path="/shipping" element={<Protected  > <Shipping/></Protected>}/>
 
       </Routes>
       <Footer />
