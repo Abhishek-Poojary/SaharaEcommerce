@@ -1,9 +1,9 @@
-import React,{ Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Form, Button } from 'react-bootstrap'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Login.css"
 import { useDispatch, useSelector } from 'react-redux'
-import {userLogin} from '../../actions/userAction'
+import { userLogin } from '../../actions/userAction'
 const Login = () => {
     const dispatch = useDispatch();
 
@@ -11,26 +11,29 @@ const Login = () => {
     const [password, setPassword] = useState();
     const [emailError, setEmailError] = useState();
     const [passwordError, setPasswordError] = useState();
-    const location=useLocation();
-    const navigate=useNavigate();
+    const location = useLocation();
+    const navigate = useNavigate();
 
-    const {error,user,isAuthenticated} =useSelector(state=>state.user);
+    const { error, user, isAuthenticated } = useSelector(state => state.user);
 
 
     const loginUser = (e) => {
         e.preventDefault();
-  
-        dispatch(userLogin(email,password))
-        
+
+        dispatch(userLogin(email, password))
+
     }
 
-    const newPath =location.search ? location.search.split("=")[1]: "/profile"
-  
-    useEffect(()=>{
-        if(isAuthenticated){
-            navigate(`/${newPath}`);
+    const newPath = location.search ? true : false
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            if (!newPath)
+                navigate("/profile");
+            else
+                navigate("/shipping");
         }
-    },[dispatch,error,isAuthenticated,newPath]);
+    }, [dispatch, error, isAuthenticated, newPath]);
 
     const verifyEmail = (event) => {
         let eIdregex = /^[a-z]+[@][a-z]+\.[com]+$/;
@@ -49,16 +52,16 @@ const Login = () => {
     }
     // need to imlement to show error to user if password is wrong
     const verifyPassword = (event) => {
-      
-        let value=event.target.value;
+
+        let value = event.target.value;
         if (!value || value === "") {
             setPasswordError("Password required");
-         
+
         } else {
             setPasswordError("");
             setPassword(value);
         }
-      
+
     }
 
 
@@ -76,7 +79,7 @@ const Login = () => {
                             type="email"
                             placeholder="Enter email"
 
-                            onChange={(e)=>verifyEmail(e)}
+                            onChange={(e) => verifyEmail(e)}
                             required />
                         <Form.Text className="text-danger">
                             {emailError}
@@ -90,7 +93,7 @@ const Login = () => {
                             placeholder="Enter Password"
 
                             required
-                            onChange={(e)=>verifyPassword(e) }
+                            onChange={(e) => verifyPassword(e)}
                         />
                         <Form.Text className="text-danger">
                             {passwordError}

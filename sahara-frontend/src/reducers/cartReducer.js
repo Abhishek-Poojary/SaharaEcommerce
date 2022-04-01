@@ -1,6 +1,7 @@
 import {
     REQUEST_FOR_ADD_TO_CART_FAIL, REQUEST_FOR_ADD_TO_CART_SUCCESS
-    , REQUEST_TO_REMOVE_FROM_CART
+    , REQUEST_TO_REMOVE_FROM_CART,
+    REQUEST_TO_SAVE_SHIPPING_INFO
 } from "../constants/CartConstants";
 
 
@@ -40,6 +41,12 @@ export const userAddCartReducer = (state = { cartItems: [], shippingInfo: {} }, 
                 cartItems: state.cartItems.filter((item) => item.product !== action.payload),
             }
 
+
+        case REQUEST_TO_SAVE_SHIPPING_INFO:
+            return {
+                ...state,
+                shippingInfo:action.payload
+            }
         default: return state;
 
     }

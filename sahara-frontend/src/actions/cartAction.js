@@ -1,11 +1,12 @@
 import axios from "axios"
 import {
     REQUEST_FOR_ADD_TO_CART_FAIL, REQUEST_FOR_ADD_TO_CART_SUCCESS,
-    REQUEST_TO_REMOVE_FROM_CART
+    REQUEST_TO_REMOVE_FROM_CART,
+    REQUEST_TO_SAVE_SHIPPING_INFO
 } from "../constants/CartConstants"
 
 
-export const userAddToCart = (id, count) => async (dispatch,getState) => {
+export const userAddToCart = (id, count) => async (dispatch, getState) => {
     try {
         const { data } = await axios.get(`/api/v1/product/${id}`)
 
@@ -15,7 +16,7 @@ export const userAddToCart = (id, count) => async (dispatch,getState) => {
                 product: data.product._id,
                 name: data.product.name,
                 price: data.product.price,
-                inStock:data.product.inStock,
+                inStock: data.product.inStock,
                 image: "https://res.cloudinary.com/dbunwmh8z/image/upload/v1648531024/samples/ecommerce/accessories-bag.jpg",
                 count,
             }
@@ -31,8 +32,17 @@ export const userAddToCart = (id, count) => async (dispatch,getState) => {
 }
 
 
-export const deleteFromCart =(id)=>async(dispatch,getState)=>{
-    dispatch({type:REQUEST_TO_REMOVE_FROM_CART,payload:id})
+export const deleteFromCart = (id) => async (dispatch, getState) => {
+    dispatch({ type: REQUEST_TO_REMOVE_FROM_CART, payload: id })
 
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+}
+
+export const addUserAddress = (data) => async (dispatch, getState) => {
+    dispatch({
+        type: REQUEST_TO_SAVE_SHIPPING_INFO,
+        payload: data
+    })
+
+    localStorage.setItem("shippingInfo",JSON.stringify(getState().cart.shippingInfo));
 }
