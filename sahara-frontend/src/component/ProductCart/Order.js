@@ -10,7 +10,7 @@ const Order = () => {
     const { user } = useSelector((state) => state.user);
   
     const subtotal = cartItems.reduce(
-        (sum, item) => sum + item.count * item.price,
+        (sum, item) => sum + item.quantity * item.price,
         0
     );
 
@@ -32,7 +32,7 @@ const Order = () => {
         }
         sessionStorage.setItem("orderInfo", JSON.stringify(order));
 
-        navigate("/success")
+        navigate("/order/paymentInfo")
     }
 
     return (

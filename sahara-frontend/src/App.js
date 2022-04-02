@@ -19,6 +19,7 @@ import Shipping from './component/ProductCart/Shipping'
 
 import Order from "./component/ProductCart/Order";
 
+import OrderPaymentInfo from "./component/ProductCart/OrderPaymentInfo";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,7 +56,9 @@ function App() {
 
         <Route exact path="/shipping" element={<Protected  > <Shipping/></Protected>}/>
 
-        <Route exact path="/order" element={<Protected  > <Order/></Protected>}/>
+        <Route exact path="/order/confirm" element={<Protected  > <Order/></Protected>}/>
+
+        <Route exact path="/order/paymentInfo" element={<Protected  > <OrderPaymentInfo/></Protected>}/>
 
       </Routes>
       <Footer />

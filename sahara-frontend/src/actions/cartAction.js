@@ -18,7 +18,7 @@ export const userAddToCart = (id, count) => async (dispatch, getState) => {
                 price: data.product.price,
                 inStock: data.product.inStock,
                 image: "https://res.cloudinary.com/dbunwmh8z/image/upload/v1648531024/samples/ecommerce/accessories-bag.jpg",
-                count,
+                quantity:count,
             }
         })
         localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));

@@ -1,0 +1,16 @@
+.customcontainer-payment {
+    display: flex;
+    margin: 2vmax auto;
+    padding: 4vmax;
+    width: 50vw;
+    border: solid 1px;
+    border-color: darkslategray;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: aliceblue;
+}
+
+
+.customForm-1 {
+    width: 100%;
+}

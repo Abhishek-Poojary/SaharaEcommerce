@@ -50,7 +50,7 @@ const Shipping = () => {
         }
         dispatch(addUserAddress(data))
 
-        navigate("/order")
+        navigate("/order/confirm")
     }
 
     return (
