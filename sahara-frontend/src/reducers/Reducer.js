@@ -2,7 +2,7 @@ import {combineReducers}  from 'redux'
 import { allProductReducer, productDetailsReducer } from './productReducer';
 import { updateUserProfileReducer, userLoginReducer } from './userReducer';
 import { userAddCartReducer } from './cartReducer';
-import { newOrderReducer } from './orderReducer';
+import { newOrderReducer ,getUserOrderReducer ,getUserOrderDetailsReducer} from './orderReducer';
 
 const reducer= combineReducers({
     products:allProductReducer,
@@ -10,7 +10,9 @@ const reducer= combineReducers({
     user:userLoginReducer,
     profile:updateUserProfileReducer,
     cart:userAddCartReducer,
-    order:newOrderReducer
+    order:newOrderReducer,
+    userOrders:getUserOrderReducer,
+    orderDetails:getUserOrderDetailsReducer
 });
 
 

@@ -20,6 +20,9 @@ import Shipping from './component/ProductCart/Shipping'
 import Order from "./component/ProductCart/Order";
 
 import OrderPaymentInfo from "./component/ProductCart/OrderPaymentInfo";
+import OrderCompleted from "./component/ProductCart/OrderCompleted";
+import UserOrders from "./component/Order/UserOrders";
+import OrderDetails from "./component/common/OrderDetails/OrderDetails"
 
 function App() {
   const dispatch = useDispatch();
@@ -59,6 +62,12 @@ function App() {
         <Route exact path="/order/confirm" element={<Protected  > <Order/></Protected>}/>
 
         <Route exact path="/order/paymentInfo" element={<Protected  > <OrderPaymentInfo/></Protected>}/>
+
+        <Route exact path="/order/success" element={<Protected  > <OrderCompleted/></Protected>}/>
+        
+        <Route exact path="/profile/orders" element={<Protected  > <UserOrders/></Protected>}/>
+
+        <Route exact path="/profile/order/:id" element={<Protected  > <OrderDetails/></Protected>}/>
 
       </Routes>
       <Footer />

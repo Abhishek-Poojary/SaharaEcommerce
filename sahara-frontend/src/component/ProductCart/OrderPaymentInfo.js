@@ -49,7 +49,7 @@ const OrderPaymentInfo = () => {
         verifyDate();
         dispatch(newOrder(data))
 
-        navigate("/success")
+        navigate("/order/success")
     }
 
     const verifyCreditCard = (event) => {
