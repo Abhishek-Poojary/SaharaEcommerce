@@ -1,7 +1,8 @@
 import {
     REQUEST_NEW_ORDER, REQUEST_NEW_ORDER_SUCCESS, REQUEST_NEW_ORDER_FAIL,
     REQUEST_USER_ORDERS, REQUEST_USER_ORDERS_FAIL, REQUEST_USER_ORDERS_SUCCESS,
-    REQUEST_USER_ORDER_DETAIL,REQUEST_USER_ORDER_DETAIL_FAIL,REQUEST_USER_ORDER_DETAIL_SUCCESS
+    REQUEST_USER_ORDER_DETAIL,REQUEST_USER_ORDER_DETAIL_FAIL,REQUEST_USER_ORDER_DETAIL_SUCCESS,
+     REQUEST_ALL_ORDER_ADMIN, REQUEST_ALL_ORDER_ADMIN_SUCCESS, REQUEST_ALL_ORDER_ADMIN_FAIL
 } from "../constants/OrderConstants";
 
 import axios from 'axios'
@@ -46,5 +47,17 @@ export const getUserOrderDetails = (id) => async (dispatch) => {
     }
     catch (error) {
         dispatch({ type: REQUEST_USER_ORDER_DETAIL_FAIL, payload: error })
+    }
+}
+
+export const getAllOrderAdmin =()=>async (dispatch)=>{
+    try{
+        dispatch({type:REQUEST_ALL_ORDER_ADMIN})
+
+        const {data} =await axios.get("/api/v1/admin/orders")
+
+        dispatch({type:REQUEST_ALL_ORDER_ADMIN_SUCCESS,payload:data})
+    }catch(error){
+        dispatch({type:REQUEST_ALL_ORDER_ADMIN_FAIL,payload:error.response.data.message})
     }
 }

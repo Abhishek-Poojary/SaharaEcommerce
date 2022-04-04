@@ -23,8 +23,10 @@ const Profile = () => {
                         <br />
                         <Link to="/profile/password/update">Change Password</Link>
                         <br />
-                        <Link to="">Orders</Link>
+                        <Link to="/profile/orders">Orders</Link>
+
                     </div>
+                   
                 </div>
             )}
 

@@ -1,17 +1,17 @@
 import React, { Fragment, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar, Nav, Container, FormControl, Button, Form ,NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Container, FormControl, Button, Form, NavDropdown } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import {logoutUser}  from "../../../actions/userAction"
+import { logoutUser } from "../../../actions/userAction"
 
 
 const Header = () => {
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
 
     const navigate = useNavigate();
     const [keyword, setKeyword] = useState("");
-    const { isAuthenticated,user } = useSelector(state => state.user);
+    const { isAuthenticated, user } = useSelector(state => state.user);
 
     const submitSearch = (e) => {
         e.preventDefault();
@@ -24,7 +24,7 @@ const Header = () => {
     }
 
 
-    const logout=()=>{
+    const logout = () => {
         dispatch(logoutUser());
         navigate('/');
     }
@@ -52,17 +52,18 @@ const Header = () => {
                             <Button variant="outline-primary" type="submit">Search</Button>
                         </Form>
                         {isAuthenticated ? (<Nav >
-                         
+
                             <NavDropdown title={user.name} >
-                                {user.userRole==="admin" ?  
-                                <NavDropdown.Item href="/dashboard">Dashboard</NavDropdown.Item>
-                                :[]
-                            }
+                                {user.userRole === "admin" ?
+                                    <NavDropdown.Item href="/admin/dashboard">Dashboard</NavDropdown.Item>
+                                    : []
+                                }
                                 <NavDropdown.Item href="/profile">my Profile</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="/cart">Cart</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+
                             </NavDropdown>
 
                         </Nav>

@@ -1,11 +1,13 @@
 const express=require("express");
 const { addProduct, getAllProducts, getProductByTags,
-     getSingleProductDetail, updateProduct, deleteProduct } = require("../controllers/productController");
+     getSingleProductDetail, updateProduct, deleteProduct, getAllProductAdmin } = require("../controllers/productController");
 const { userAuthentication, roleAuthentication } = require("../middleware/authenticate");
 const router= express.Router();
 
 
 router.route("/admin/product/new").post(userAuthentication,addProduct);
+
+router.route("/admin/product/all").get(userAuthentication,roleAuthentication("admin"),getAllProductAdmin);
 
 router.route("/products/all").get(getAllProducts);
 

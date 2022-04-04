@@ -3,7 +3,8 @@ import axios from 'axios'
 import {
     REQUEST_FOR_ALL_PRODUCTS, REQUEST_FOR_ALL_PRODUCTS_SUCCESS,
     REQUEST_FOR_ALL_PRODUCTS_FAIL, CLEAR_ERROR, REQUEST_FOR_PRODUCTS_DETAILS,
-    REQUEST_FOR_PRODUCTS_DETAILS_FAIL, REQUEST_FOR_PRODUCTS_DETAILS_SUCCESS
+    REQUEST_FOR_PRODUCTS_DETAILS_FAIL, REQUEST_FOR_PRODUCTS_DETAILS_SUCCESS,
+    REQUEST_ALL_PRODUCT_ADMIN,REQUEST_ALL_PRODUCT_ADMIN_FAIL,REQUEST_ALL_PRODUCT_ADMIN_SUCCESS
 } from "../constants/ProductConstants"
 
 
@@ -49,5 +50,28 @@ export const getProductDetails = (id) => async (dispatch) => {
 
 export const clearErrors = () => async (dispatch) => {
      dispatch({type:CLEAR_ERROR})
+
+}
+
+
+
+
+export const getAllProductAdmin = () => async (dispatch) => {
+    try {
+        dispatch({ type: REQUEST_ALL_PRODUCT_ADMIN })
+
+        const { data } = await axios.get("/api/v1/admin/product/all")
+
+        dispatch({
+             type: REQUEST_ALL_PRODUCT_ADMIN_SUCCESS, 
+             payload: data.products
+            })
+
+    } catch (error) {
+        dispatch({
+            type: REQUEST_ALL_PRODUCT_ADMIN_FAIL,
+            payload: error.response.data.message
+        })
+    }
 
 }

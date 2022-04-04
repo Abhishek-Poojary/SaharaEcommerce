@@ -1,8 +1,8 @@
 import {combineReducers}  from 'redux'
 import { allProductReducer, productDetailsReducer } from './productReducer';
-import { updateUserProfileReducer, userLoginReducer } from './userReducer';
+import { updateUserProfileReducer, userLoginReducer ,allUsersAdminReducer } from './userReducer';
 import { userAddCartReducer } from './cartReducer';
-import { newOrderReducer ,getUserOrderReducer ,getUserOrderDetailsReducer} from './orderReducer';
+import { newOrderReducer ,getUserOrderReducer ,getUserOrderDetailsReducer ,getAllOrderAdminReducer} from './orderReducer';
 
 const reducer= combineReducers({
     products:allProductReducer,
@@ -12,7 +12,9 @@ const reducer= combineReducers({
     cart:userAddCartReducer,
     order:newOrderReducer,
     userOrders:getUserOrderReducer,
-    orderDetails:getUserOrderDetailsReducer
+    orderDetails:getUserOrderDetailsReducer,
+    adminAllOrders:getAllOrderAdminReducer,
+    adminAllUsers:allUsersAdminReducer
 });
 
 

@@ -45,15 +45,9 @@ exports.loggedInUserOrders=catchasyncerror(async(req,res,next)=>{
 exports.getAllOrders=catchasyncerror(async(req,res,next)=>{
     const order=await Order.find();
 
-    let total=0;
-
-    order.forEach((value)=>{
-        total+=value.totalPrice
-    })
 
     res.status(200).json({
         success:true,
-        total,
         order
     });
 })

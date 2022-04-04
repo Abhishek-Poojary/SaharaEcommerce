@@ -7,7 +7,8 @@ import {
     REQUEST_TO_LOGOUT_USER_FAIL, REQUEST_TO_LOGOUT_USER_SUCCESS,
     REQUEST_TO_RESET_PROFILE,
     REQUEST_TO_UPDATE_USER_PROFILE, REQUEST_TO_UPDATE_USER_PROFILE_FAIL, REQUEST_TO_UPDATE_USER_PROFILE_SUCCESS,
-    REQUEST_TO_UPDATE_USER_PASSWORD, REQUEST_TO_UPDATE_USER_PASSWORD_FAIL, REQUEST_TO_UPDATE_USER_PASSWORD_SUCCESS
+    REQUEST_TO_UPDATE_USER_PASSWORD, REQUEST_TO_UPDATE_USER_PASSWORD_FAIL, REQUEST_TO_UPDATE_USER_PASSWORD_SUCCESS,
+    REQUEST_ALL_USER_ADMIN,REQUEST_ALL_USER_ADMIN_FAIL,REQUEST_ALL_USER_ADMIN_SUCCESS
 }
     from "../constants/UserConstants"
 
@@ -88,5 +89,33 @@ export const updateUserProfileReducer = (state = {}, action) => {
 
     }
 }
+
+
+export const allUsersAdminReducer = (state = {}, action) => {
+    switch (action.type) {
+
+        case REQUEST_ALL_USER_ADMIN:
+            return {
+                loading: true
+
+            }
+    
+        case REQUEST_ALL_USER_ADMIN_FAIL:
+            return {
+                loading: false,
+                error: action.payload,
+            }
+       
+        case REQUEST_ALL_USER_ADMIN_SUCCESS:
+            return {
+                loading: false,
+                users: action.payload.users
+            }
+
+        default: return state;
+
+    }
+}
+
 
 

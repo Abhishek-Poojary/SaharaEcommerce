@@ -23,6 +23,8 @@ import OrderPaymentInfo from "./component/ProductCart/OrderPaymentInfo";
 import OrderCompleted from "./component/ProductCart/OrderCompleted";
 import UserOrders from "./component/Order/UserOrders";
 import OrderDetails from "./component/common/OrderDetails/OrderDetails"
+import AdminDashboard from "./component/Admin/AdminDashboard";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -51,9 +53,9 @@ function App() {
 
         <Route exact  path="/profile" element={<Protected  > <Profile/></Protected>}/>
 
-        <Route exact  path="/profile/update" element={<Protected  > <UpdateProfile/></Protected>}/>
+        <Route exact  path="/profile/update" element={<Protected  > <UpdateProfile /></Protected>}/>
 
-        <Route exact path="/profile/password/update" element={<Protected  > <UpdatePassword/></Protected>}/>
+        <Route exact path="/profile/password/update" element={<Protected   > <UpdatePassword /></Protected>}/>
 
         <Route exact path="/cart" element={ <Cart/>}/>
 
@@ -68,6 +70,8 @@ function App() {
         <Route exact path="/profile/orders" element={<Protected  > <UserOrders/></Protected>}/>
 
         <Route exact path="/profile/order/:id" element={<Protected  > <OrderDetails/></Protected>}/>
+
+        <Route exact path="/admin/dashboard" element={<Protected adminRoute={true} > <AdminDashboard/></Protected>}/>
 
       </Routes>
       <Footer />

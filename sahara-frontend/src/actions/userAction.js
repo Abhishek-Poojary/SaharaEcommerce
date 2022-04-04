@@ -7,7 +7,8 @@ import {
     REQUEST_TO_LOAD_USER, REQUEST_TO_LOAD_USER_FAIL, REQUEST_TO_LOAD_USER_SUCCESS,
     REQUEST_TO_LOGOUT_USER_FAIL,REQUEST_TO_LOGOUT_USER_SUCCESS,
     REQUEST_TO_UPDATE_USER_PROFILE, REQUEST_TO_UPDATE_USER_PROFILE_FAIL, REQUEST_TO_UPDATE_USER_PROFILE_SUCCESS,
-    REQUEST_TO_UPDATE_USER_PASSWORD, REQUEST_TO_UPDATE_USER_PASSWORD_FAIL, REQUEST_TO_UPDATE_USER_PASSWORD_SUCCESS
+    REQUEST_TO_UPDATE_USER_PASSWORD, REQUEST_TO_UPDATE_USER_PASSWORD_FAIL, REQUEST_TO_UPDATE_USER_PASSWORD_SUCCESS,
+    REQUEST_ALL_USER_ADMIN,REQUEST_ALL_USER_ADMIN_FAIL,REQUEST_ALL_USER_ADMIN_SUCCESS
 }
     from "../constants/UserConstants"
 
@@ -104,6 +105,19 @@ export const userPasswordUpdate =(userData)=>async(dispatch)=>{
         dispatch({ type: REQUEST_TO_UPDATE_USER_PASSWORD_SUCCESS, payload: data.success})
     }catch(error){
         dispatch({ type: REQUEST_TO_UPDATE_USER_PASSWORD_FAIL, payload: error.response.data.message })
+    }
+}
+
+
+export const getAllUsersAdmin =()=>async (dispatch)=>{
+    try{
+        dispatch({type:REQUEST_ALL_USER_ADMIN})
+
+        const {data} =await axios.get("/api/v1/admin/users/all")
+
+        dispatch({type:REQUEST_ALL_USER_ADMIN_SUCCESS,payload:data})
+    }catch(error){
+        dispatch({type:REQUEST_ALL_USER_ADMIN_FAIL,payload:error.response.data.message})
     }
 }
 
