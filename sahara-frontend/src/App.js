@@ -25,7 +25,12 @@ import UserOrders from "./component/Order/UserOrders";
 import OrderDetails from "./component/common/OrderDetails/OrderDetails"
 import AdminDashboard from "./component/Admin/AdminDashboard";
 
+import ProductPage from "./component/Admin/ProductPage";
+import OrderPage from "./component/Admin/OrderPage";
+import UsersPage from "./component/Admin/UsersPage";
 
+import ProductUpdate from "./component/Admin/ProductUpdate";
+import ProductCreate from "./component/Admin/ProductCreate";
 function App() {
   const dispatch = useDispatch();
   const {isAuthenticated,error,user} =useSelector((state)=>state.user)
@@ -72,6 +77,16 @@ function App() {
         <Route exact path="/profile/order/:id" element={<Protected  > <OrderDetails/></Protected>}/>
 
         <Route exact path="/admin/dashboard" element={<Protected adminRoute={true} > <AdminDashboard/></Protected>}/>
+
+        <Route exact path="/admin/products/all" element={<Protected adminRoute={true} > <ProductPage/></Protected>}/>
+        
+        <Route exact path="/admin/orders/all" element={<Protected adminRoute={true} > <OrderPage/></Protected>}/>
+
+        <Route exact path="/admin/users/all" element={<Protected adminRoute={true} > <UsersPage/></Protected>}/>
+
+        <Route exact path="/admin/product/:id" element={<Protected adminRoute={true} > <ProductUpdate/></Protected>}/>
+
+        <Route exact path="/admin/product/new" element={<Protected adminRoute={true} > <ProductCreate/></Protected>}/>
 
       </Routes>
       <Footer />

@@ -1,5 +1,5 @@
 import {combineReducers}  from 'redux'
-import { allProductReducer, productDetailsReducer } from './productReducer';
+import { allProductReducer, createProductReducer, productDetailsReducer } from './productReducer';
 import { updateUserProfileReducer, userLoginReducer ,allUsersAdminReducer } from './userReducer';
 import { userAddCartReducer } from './cartReducer';
 import { newOrderReducer ,getUserOrderReducer ,getUserOrderDetailsReducer ,getAllOrderAdminReducer} from './orderReducer';
@@ -14,7 +14,8 @@ const reducer= combineReducers({
     userOrders:getUserOrderReducer,
     orderDetails:getUserOrderDetailsReducer,
     adminAllOrders:getAllOrderAdminReducer,
-    adminAllUsers:allUsersAdminReducer
+    adminAllUsers:allUsersAdminReducer,
+    createProduct:createProductReducer
 });
 
 

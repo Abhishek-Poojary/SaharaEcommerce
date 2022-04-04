@@ -2,7 +2,8 @@ import {
     REQUEST_FOR_ALL_PRODUCTS, REQUEST_FOR_ALL_PRODUCTS_SUCCESS,
     REQUEST_FOR_ALL_PRODUCTS_FAIL, CLEAR_ERROR, REQUEST_FOR_PRODUCTS_DETAILS,
     REQUEST_FOR_PRODUCTS_DETAILS_FAIL, REQUEST_FOR_PRODUCTS_DETAILS_SUCCESS,
-    REQUEST_ALL_PRODUCT_ADMIN, REQUEST_ALL_PRODUCT_ADMIN_FAIL, REQUEST_ALL_PRODUCT_ADMIN_SUCCESS
+    REQUEST_ALL_PRODUCT_ADMIN, REQUEST_ALL_PRODUCT_ADMIN_FAIL, REQUEST_ALL_PRODUCT_ADMIN_SUCCESS,
+    REQUEST_CREATE_PRODUCT_ADMIN,REQUEST_CREATE_PRODUCT_ADMIN_FAIL,REQUEST_CREATE_PRODUCT_ADMIN_SUCCESS, REQUEST_CREATE_PRODUCT_ADMIN_RESET
 } from "../constants/ProductConstants"
 
 export const allProductReducer = (state = { products: [] }, action) => {
@@ -65,6 +66,36 @@ export const productDetailsReducer = (state = { product: [] }, action) => {
             return {
                 ...state,
                 error: null
+            };
+        default: return state;
+    }
+}
+
+export const createProductReducer = (state = { product: {} }, action) => {
+
+    switch (action.type) {
+        case REQUEST_CREATE_PRODUCT_ADMIN:
+            return {
+                ...state,
+                loading:true
+            }
+        case REQUEST_CREATE_PRODUCT_ADMIN_FAIL:
+            return {
+                ...state,
+                loading:false,
+                error: action.payload,
+            }
+        case REQUEST_CREATE_PRODUCT_ADMIN_SUCCESS:
+            return {
+                loading:false,
+                status:action.payload.success,
+                product: action.payload.product
+            }
+
+        case REQUEST_CREATE_PRODUCT_ADMIN_RESET:
+            return {
+                ...state,
+                status:false
             };
         default: return state;
     }

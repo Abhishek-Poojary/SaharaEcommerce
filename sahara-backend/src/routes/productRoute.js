@@ -5,7 +5,7 @@ const { userAuthentication, roleAuthentication } = require("../middleware/authen
 const router= express.Router();
 
 
-router.route("/admin/product/new").post(userAuthentication,addProduct);
+router.route("/admin/product/new").post(userAuthentication,roleAuthentication("admin"),addProduct);
 
 router.route("/admin/product/all").get(userAuthentication,roleAuthentication("admin"),getAllProductAdmin);
 
