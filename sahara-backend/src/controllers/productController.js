@@ -2,11 +2,11 @@ const Product = require("../models/productModel");
 const catchAsyncError = require("../middleware/catchAsyncError");
 const Searchapi = require("../utilities/Searchapi")
 const ErrorHandler = require("../utilities/ErrorHandler")
-const cloudinary =require("cloudinary")
+const cloudinary = require("cloudinary")
 exports.addProduct = catchAsyncError(async (req, res, next) => {
 
 
-    let  images = []
+    let images = []
 
     if (typeof req.body.images === "string") {
         images.push(req.body.images)
@@ -19,16 +19,16 @@ exports.addProduct = catchAsyncError(async (req, res, next) => {
 
     for (let i = 0; i < images.length; i++) {
         const result = await cloudinary.v2.uploader.upload(images[i], {
-          folder: "products",
+            folder: "products",
         });
-    
-        ImageURLS .push({
-          public_id: result.public_id,
-          url: result.secure_url,
-        });
-      }
 
-      req.body.images=ImageURLS
+        ImageURLS.push({
+            public_id: result.public_id,
+            url: result.secure_url,
+        });
+    }
+
+    req.body.images = ImageURLS
     req.body.user = req.user.id;
 
     const product = await Product.create(req.body);
@@ -110,6 +110,40 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
     if (!product) {
         return next(new ErrorHandler("Invalid Product id", 404));
     }
+
+
+    let images = []
+
+    if (typeof req.body.images === "string") {
+        images.push(req.body.images)
+    } else {
+        images = req.body.images
+    }
+
+    if (images !== undefined) {
+        for (let i = 0; i < product.images.length; i++) {
+            await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+
+        }
+
+
+        let ImageURLS = [];
+
+        for (let i = 0; i < images.length; i++) {
+            const result = await cloudinary.v2.uploader.upload(images[i], {
+                folder: "products",
+            });
+
+            ImageURLS.push({
+                public_id: result.public_id,
+                url: result.secure_url,
+            });
+        }
+
+        req.body.images = ImageURLS
+    }
+
+
 
     const updated = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
