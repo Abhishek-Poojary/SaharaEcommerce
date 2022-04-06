@@ -1,6 +1,6 @@
 import {combineReducers}  from 'redux'
 import { allProductReducer, createProductReducer, productDetailsReducer,updateProductReducer,deleteProductReducer } from './productReducer';
-import { updateUserProfileReducer, userLoginReducer ,allUsersAdminReducer } from './userReducer';
+import { updateUserProfileReducer, userLoginReducer ,allUsersAdminReducer, userAdminReducer } from './userReducer';
 import { userAddCartReducer } from './cartReducer';
 import { newOrderReducer ,getUserOrderReducer ,getUserOrderDetailsReducer ,getAllOrderAdminReducer,processOrderReducer} from './orderReducer';
 
@@ -18,7 +18,8 @@ const reducer= combineReducers({
     createProduct:createProductReducer,
     updateProduct:updateProductReducer,
     deleteProduct:deleteProductReducer,
-    processOrder:processOrderReducer
+    processOrder:processOrderReducer,
+    adminUser:userAdminReducer
 });
 
 

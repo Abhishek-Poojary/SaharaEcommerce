@@ -148,7 +148,7 @@ exports.updateUserRole=catchAsyncError(async(req,res,next)=>{
         return next(new ErrorHandler("Invalid User id",400));
     }
 
-    user.userRole="admin";
+        user.userRole=req.body.userRole;
 
     await user.save();
 

@@ -33,6 +33,8 @@ import ProductUpdate from "./component/Admin/ProductUpdate";
 import ProductCreate from "./component/Admin/ProductCreate";
 import OrderUpdate from "./component/Admin/OrderUpdate";
 
+import UserUpdate from "./component/Admin/UserUpdate";
+
 function App() {
   const dispatch = useDispatch();
   const {isAuthenticated,error,user} =useSelector((state)=>state.user)
@@ -91,6 +93,8 @@ function App() {
         <Route exact path="/admin/product/new" element={<Protected adminRoute={true} > <ProductCreate/></Protected>}/>
 
         <Route exact path="/admin/order/:id" element={<Protected adminRoute={true} > <OrderUpdate/></Protected>}/>
+
+        <Route exact path="/admin/user/:id" element={<Protected adminRoute={true} > <UserUpdate/></Protected>}/>
       </Routes>
       <Footer />
     </Router>

@@ -8,7 +8,10 @@ import {
     REQUEST_TO_LOGOUT_USER_FAIL,REQUEST_TO_LOGOUT_USER_SUCCESS,
     REQUEST_TO_UPDATE_USER_PROFILE, REQUEST_TO_UPDATE_USER_PROFILE_FAIL, REQUEST_TO_UPDATE_USER_PROFILE_SUCCESS,
     REQUEST_TO_UPDATE_USER_PASSWORD, REQUEST_TO_UPDATE_USER_PASSWORD_FAIL, REQUEST_TO_UPDATE_USER_PASSWORD_SUCCESS,
-    REQUEST_ALL_USER_ADMIN,REQUEST_ALL_USER_ADMIN_FAIL,REQUEST_ALL_USER_ADMIN_SUCCESS
+    REQUEST_ALL_USER_ADMIN,REQUEST_ALL_USER_ADMIN_FAIL,REQUEST_ALL_USER_ADMIN_SUCCESS,
+    REQUEST_USER_ADMIN,REQUEST_USER_ADMIN_FAIL,REQUEST_USER_ADMIN_SUCCESS,
+    REQUEST_USER_ROLE_UPDATE_ADMIN,REQUEST_USER_ROLE_UPDATE_ADMIN_FAIL,REQUEST_USER_ROLE_UPDATE_ADMIN_SUCCESS,
+    REQUEST_REMOVE_USER_ADMIN,REQUEST_REMOVE_USER_ADMIN_FAIL,REQUEST_REMOVE_USER_ADMIN_SUCCESS
 }
     from "../constants/UserConstants"
 
@@ -118,6 +121,43 @@ export const getAllUsersAdmin =()=>async (dispatch)=>{
         dispatch({type:REQUEST_ALL_USER_ADMIN_SUCCESS,payload:data})
     }catch(error){
         dispatch({type:REQUEST_ALL_USER_ADMIN_FAIL,payload:error.response.data.message})
+    }
+}
+
+export const getUserDetailsAdmin =(id)=>async (dispatch)=>{
+    try{
+        dispatch({type:REQUEST_USER_ADMIN})
+
+        const {data} =await axios.get(`/api/v1/admin/users/${id}`)
+
+        dispatch({type:REQUEST_USER_ADMIN_SUCCESS,payload:data})
+    }catch(error){
+        dispatch({type:REQUEST_USER_ADMIN_FAIL,payload:error.response.data.message})
+    }
+}
+
+
+export const updateUserRoleAdmin =(id,udata) =>async(dispatch)=>{
+    try{
+        dispatch({type:REQUEST_USER_ROLE_UPDATE_ADMIN})
+
+        const {data} =await axios.put(`/api/v1/admin/users/${id}`,udata)
+
+        dispatch({type:REQUEST_USER_ROLE_UPDATE_ADMIN_SUCCESS,payload:data})
+    }catch(error){
+        dispatch({type:REQUEST_USER_ROLE_UPDATE_ADMIN_FAIL,payload:error.response.data.message})
+    }
+}
+
+export const deleteUserAdmin =(id) =>async(dispatch)=>{
+    try{
+        dispatch({type:REQUEST_REMOVE_USER_ADMIN})
+
+        const {data} =await axios.delete(`/api/v1/admin/users/${id}`)
+
+        dispatch({type:REQUEST_REMOVE_USER_ADMIN_SUCCESS,payload:data})
+    }catch(error){
+        dispatch({type:REQUEST_REMOVE_USER_ADMIN_FAIL,payload:error.response.data.message})
     }
 }
 
