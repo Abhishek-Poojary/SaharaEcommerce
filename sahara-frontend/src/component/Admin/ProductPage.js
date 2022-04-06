@@ -1,11 +1,26 @@
-import { Fragment } from "react"
-import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Fragment, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
+import { deleteProductAdmin } from "../../actions/productAction"
+import {REQUEST_DELETE_PRODUCT_ADMIN_RESET} from "../../constants/ProductConstants"
+import {getAllProductAdmin} from "../../actions/productAction"
+
 const ProductPage =()=>{
     const {loading,products} =useSelector((state)=>state.products)
-    
-    if(loading===false)
-    console.log(products)
+    const {loading : deleteload,status} =useSelector((state)=>state.deleteProduct)
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
+    useEffect(()=>{
+        if(status){
+            navigate('/admin/dashboard')
+            dispatch({type:REQUEST_DELETE_PRODUCT_ADMIN_RESET})
+        }
+        dispatch(getAllProductAdmin())
+    },[dispatch,navigate,status])
+
+    const deleteProduct=(id)=>{
+        dispatch(deleteProductAdmin(id))
+    }
     return (
         <Fragment>
             <h1>Add Product</h1>
@@ -17,6 +32,8 @@ const ProductPage =()=>{
                         <h3>{product.price}</h3>
 
                         <Link to={`/admin/product/${product._id}`}>Update</Link>
+
+                        <button onClick={()=>deleteProduct(product._id)}>Delete</button>
                     </div>
                 ))
             )}

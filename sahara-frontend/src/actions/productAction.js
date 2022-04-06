@@ -7,6 +7,8 @@ import {
     REQUEST_ALL_PRODUCT_ADMIN,REQUEST_ALL_PRODUCT_ADMIN_FAIL,REQUEST_ALL_PRODUCT_ADMIN_SUCCESS,
     REQUEST_CREATE_PRODUCT_ADMIN,REQUEST_CREATE_PRODUCT_ADMIN_FAIL,REQUEST_CREATE_PRODUCT_ADMIN_SUCCESS,
     REQUEST_UPDATE_PRODUCT_ADMIN,REQUEST_UPDATE_PRODUCT_ADMIN_FAIL,REQUEST_UPDATE_PRODUCT_ADMIN_SUCCESS,
+    REQUEST_DELETE_PRODUCT_ADMIN,
+    REQUEST_DELETE_PRODUCT_ADMIN_FAIL,REQUEST_DELETE_PRODUCT_ADMIN_SUCCESS,REQUEST_DELETE_PRODUCT_ADMIN_RESET
 
 } from "../constants/ProductConstants"
 
@@ -119,6 +121,30 @@ export const createProductAdmin = (product) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: REQUEST_CREATE_PRODUCT_ADMIN_FAIL,
+            payload: error.response.data.message
+        })
+    }
+
+}
+
+
+
+export const deleteProductAdmin = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: REQUEST_DELETE_PRODUCT_ADMIN })
+
+        const config = { headers: { "Content-Type": "application/json" }, };
+
+        const { data } = await axios.delete(`/api/v1/admin/product/${id}`,config)
+
+        dispatch({
+             type: REQUEST_DELETE_PRODUCT_ADMIN_SUCCESS, 
+             payload: data
+            })
+
+    } catch (error) {
+        dispatch({
+            type: REQUEST_DELETE_PRODUCT_ADMIN_FAIL,
             payload: error.response.data.message
         })
     }

@@ -2,7 +2,9 @@ import {
     REQUEST_NEW_ORDER, REQUEST_NEW_ORDER_SUCCESS, REQUEST_NEW_ORDER_FAIL
     , REQUEST_USER_ORDERS, REQUEST_USER_ORDERS_FAIL, REQUEST_USER_ORDERS_SUCCESS,
     REQUEST_USER_ORDER_DETAIL, REQUEST_USER_ORDER_DETAIL_FAIL, REQUEST_USER_ORDER_DETAIL_SUCCESS,
-    REQUEST_ALL_ORDER_ADMIN, REQUEST_ALL_ORDER_ADMIN_SUCCESS, REQUEST_ALL_ORDER_ADMIN_FAIL
+    REQUEST_ALL_ORDER_ADMIN, REQUEST_ALL_ORDER_ADMIN_SUCCESS, REQUEST_ALL_ORDER_ADMIN_FAIL,
+         REQUEST_PROCESS_ORDER_ADMIN,REQUEST_PROCESS_ORDER_ADMIN_FAIL,REQUEST_PROCESS_ORDER_ADMIN_SUCCESS,
+     REQUEST_PROCESS_ORDER_ADMIN_RESET
 } from "../constants/OrderConstants";
 
 
@@ -124,6 +126,42 @@ export const getUserOrderDetailsReducer = (state = { order: [] }, action) => {
             };
 
 
+
+        default: return state;
+    }
+
+}
+
+
+
+export const processOrderReducer = (state = {  }, action) => {
+    switch (action.type) {
+        case REQUEST_PROCESS_ORDER_ADMIN:
+            return {
+                loading: true
+            };
+
+
+
+        case REQUEST_PROCESS_ORDER_ADMIN_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            };
+
+
+
+        case REQUEST_PROCESS_ORDER_ADMIN_SUCCESS:
+            return {
+                loading: false,
+                status: action.payload.success
+            };
+
+        case REQUEST_PROCESS_ORDER_ADMIN_RESET:
+            return {
+                loading: false,
+                status:false
+            };
 
         default: return state;
     }

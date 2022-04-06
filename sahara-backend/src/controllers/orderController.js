@@ -72,7 +72,7 @@ exports.updateOrder=catchasyncerror(async(req,res,next)=>{
 
     order.orderStatus=req.body.status;
 
-    if(order.orderStatus==="Delivered"){
+    if(req.body.status==="Delivered"){
         order.deliveredAt=Date.now();
     }
 

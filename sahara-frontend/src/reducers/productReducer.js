@@ -6,7 +6,10 @@ import {
     REQUEST_CREATE_PRODUCT_ADMIN,REQUEST_CREATE_PRODUCT_ADMIN_FAIL,REQUEST_CREATE_PRODUCT_ADMIN_SUCCESS, 
     REQUEST_CREATE_PRODUCT_ADMIN_RESET,
     REQUEST_UPDATE_PRODUCT_ADMIN,REQUEST_UPDATE_PRODUCT_ADMIN_FAIL,REQUEST_UPDATE_PRODUCT_ADMIN_SUCCESS,
-    REQUEST_UPDATE_PRODUCT_ADMIN_RESET
+    REQUEST_UPDATE_PRODUCT_ADMIN_RESET,
+    REQUEST_DELETE_PRODUCT_ADMIN,
+    REQUEST_DELETE_PRODUCT_ADMIN_FAIL,REQUEST_DELETE_PRODUCT_ADMIN_SUCCESS,REQUEST_DELETE_PRODUCT_ADMIN_RESET
+
 } from "../constants/ProductConstants"
 
 export const allProductReducer = (state = { products: [] }, action) => {
@@ -127,6 +130,36 @@ export const updateProductReducer = (state = {  }, action) => {
             }
 
         case REQUEST_UPDATE_PRODUCT_ADMIN_RESET:
+            return {
+                ...state,
+                status:false
+            };
+        default: return state;
+    }
+}
+
+
+export const deleteProductReducer = (state = {  }, action) => {
+
+    switch (action.type) {
+        case REQUEST_DELETE_PRODUCT_ADMIN:
+            return {
+                ...state,
+                loading:true
+            }
+        case REQUEST_DELETE_PRODUCT_ADMIN_FAIL:
+            return {
+                ...state,
+                loading:false,
+                error: action.payload,
+            }
+        case REQUEST_DELETE_PRODUCT_ADMIN_SUCCESS:
+            return {
+                loading:false,
+                status:action.payload.success,
+            }
+
+        case REQUEST_DELETE_PRODUCT_ADMIN_RESET:
             return {
                 ...state,
                 status:false
