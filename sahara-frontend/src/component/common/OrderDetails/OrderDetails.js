@@ -12,13 +12,11 @@ const OrderDetails = () => {
     const { loading, error, order } = useSelector((state) => state.orderDetails)
     useEffect(() => {
         dispatch(getUserOrderDetails(id))
-    }, [])
+    }, [dispatch,id])
 
     return (
         <Fragment>
-            {loading ? (
-                <h1>hi</h1>
-            ) : (
+            {loading ===false &&
                 <div className="customContainer">
                     <Col>
                     <h1>{order.shippingInfo.address}</h1>
@@ -43,7 +41,7 @@ const OrderDetails = () => {
                 </Col>
                   
                 </div >
-            )
+            
             }
 
 
