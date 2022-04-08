@@ -3,8 +3,7 @@ import {
     REQUEST_USER_ORDERS, REQUEST_USER_ORDERS_FAIL, REQUEST_USER_ORDERS_SUCCESS,
     REQUEST_USER_ORDER_DETAIL,REQUEST_USER_ORDER_DETAIL_FAIL,REQUEST_USER_ORDER_DETAIL_SUCCESS,
      REQUEST_ALL_ORDER_ADMIN, REQUEST_ALL_ORDER_ADMIN_SUCCESS, REQUEST_ALL_ORDER_ADMIN_FAIL,
-     REQUEST_PROCESS_ORDER_ADMIN,REQUEST_PROCESS_ORDER_ADMIN_FAIL,REQUEST_PROCESS_ORDER_ADMIN_SUCCESS,
-     REQUEST_PROCESS_ORDER_ADMIN_RESET
+     REQUEST_PROCESS_ORDER_ADMIN,REQUEST_PROCESS_ORDER_ADMIN_FAIL,REQUEST_PROCESS_ORDER_ADMIN_SUCCESS
 } from "../constants/OrderConstants";
 
 import axios from 'axios'
@@ -16,6 +15,8 @@ export const newOrder = (orderData) => async (dispatch, getState) => {
         const { data } = await axios.post("/api/v1/order/new", orderData)
 
         dispatch({ type: REQUEST_NEW_ORDER_SUCCESS, payload: data })
+
+        localStorage.removeItem("cartItems");
     }
     catch (error) {
         dispatch({ type: REQUEST_NEW_ORDER_FAIL, payload: error.response.data.message })

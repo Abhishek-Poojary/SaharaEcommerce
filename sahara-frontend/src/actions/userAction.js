@@ -74,6 +74,8 @@ export const logoutUser=()=>async(dispatch)=>{
        await axios.get("/api/v1/logout")
 
        dispatch({type:REQUEST_TO_LOGOUT_USER_SUCCESS})
+
+       localStorage.removeItem("shippingInfo");
     }catch(error){
         dispatch({type:REQUEST_TO_LOGOUT_USER_FAIL,payload:error.response.data.message})
     }

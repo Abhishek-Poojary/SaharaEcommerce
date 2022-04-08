@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import { Slider } from "@material-ui/core"
 import './Products.css'
+import { Button } from "react-bootstrap";
 
 
 
@@ -20,7 +21,11 @@ const Products = () => {
 
     useEffect(() => {
         dispatch(getAllProducts(keyword, currentPage, price));
-    }, [dispatch, keyword, currentPage, price])
+    }, [dispatch, keyword, currentPage])
+
+    const searchByPrice=(e)=>{
+        dispatch(getAllProducts(keyword, currentPage, price));
+    }
 
     const changePrice = (event, p) => {
         setPrice(p);
@@ -47,7 +52,7 @@ const Products = () => {
                     min={0}
                     max={70000}
                 />
-
+                <Button onClick={searchByPrice} >Search</Button>
 
             </div>
 

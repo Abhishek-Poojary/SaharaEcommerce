@@ -22,7 +22,7 @@ const OrderUpdate = () => {
         }
         dispatch(getUserOrderDetails(id))
 
-    }, [dispatch, id])
+    }, [dispatch, id,update])
 
 
     const updateOrder=(e)=>{
