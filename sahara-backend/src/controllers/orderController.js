@@ -1,112 +1,110 @@
-const Order =require("../models/orderModel");
-const catchasyncerror =require("../middleware/catchAsyncError");
-const ErrorHandler=require("../utilities/ErrorHandler")
-const Product=require("../models/productModel")
+const Order = require("../models/orderModel");
+const catchasyncerror = require("../middleware/catchAsyncError");
+const ErrorHandler = require("../utilities/ErrorHandler")
+const Product = require("../models/productModel")
 
-exports.placeOrder=catchasyncerror(async (req,res,next)=>{  //
+exports.placeOrder = catchasyncerror(async (req, res, next) => {  //
 
-    const order=await Order.create({...req.body,
-        paidAt:Date.now(),
-        user:req.user.id
+    const order = await Order.create({
+        ...req.body,
+        paidAt: Date.now(),
+        user: req.user.id
     })
-    
+
+    order.orderItems.forEach(async (val) => {
+        await updateQuantity(val.product, val.quantity);
+    })
+
 
     res.status(200).json({
-        success:true,
+        success: true,
         order
     })
 })
 
+async function updateQuantity(id, quantity) {
+    const product = await Product.findById(id);
 
-exports.getOrderDetails=catchasyncerror(async(req,res,next)=>{
-    const order=await Order.findById(req.params.id);
+    product.inStock -= quantity;
 
-    if(!order){
-        return next(new ErrorHandler("Invalid Order Id",400));
+    return await product.save({ validateBeforeSave: false });
+
+}
+
+exports.getOrderDetails = catchasyncerror(async (req, res, next) => {
+    const order = await Order.findById(req.params.id);
+
+    if (!order) {
+        return next(new ErrorHandler("Invalid Order Id", 400));
     }
 
     res.status(200).json({
-        success:true,
+        success: true,
         order,
     })
 })
 
-exports.loggedInUserOrders=catchasyncerror(async(req,res,next)=>{
-    const order=await Order.find({user:req.user.id});
+exports.loggedInUserOrders = catchasyncerror(async (req, res, next) => {
+    const order = await Order.find({ user: req.user.id });
 
     res.status(200).json({
-        success:true,
+        success: true,
         order
     });
 
 });
 
 
-exports.getAllOrders=catchasyncerror(async(req,res,next)=>{
-    const order=await Order.find();
+exports.getAllOrders = catchasyncerror(async (req, res, next) => {
+    const order = await Order.find();
 
 
     res.status(200).json({
-        success:true,
+        success: true,
         order
     });
 })
 
 
-exports.updateOrder=catchasyncerror(async(req,res,next)=>{
-    const order=await Order.findById(req.params.id);
+exports.updateOrder = catchasyncerror(async (req, res, next) => {
+    const order = await Order.findById(req.params.id);
 
-    if(!order){
-        return next(new ErrorHandler("Invalid Order Id",400));
+    if (!order) {
+        return next(new ErrorHandler("Invalid Order Id", 400));
     }
 
-    if(order.orderStatus==="Delivered"){
+    if (order.orderStatus === "Delivered") {
         return next(new ErrorHander("order already delivered", 400));
     }
 
-    if(req.body.status==="Shipped"){
-        order.orderItems.forEach(async(val)=>{
-            await updateQuantity(val.product,val.quantity);
-        })
+    order.orderStatus = req.body.status;
+
+    if (req.body.status === "Delivered") {
+        order.deliveredAt = Date.now();
     }
 
-    order.orderStatus=req.body.status;
-
-    if(req.body.status==="Delivered"){
-        order.deliveredAt=Date.now();
-    }
-
-    await order.save({validateBeforeSave: false});
+    await order.save({ validateBeforeSave: false });
 
     res.status(200).json({
-        success:true,
-        orderStatus:order.orderStatus
+        success: true,
+        orderStatus: order.orderStatus
     })
 
 })
 
-async function updateQuantity(id,quantity){
-    const product=await Product.findById(id);
 
-    product.inStock-=quantity;
+exports.deleteOrder = catchasyncerror(async (req, res, next) => {
+    const order = await Order.findById(req.params.id);
 
-    return await product.save({validateBeforeSave: false});
-
-}
-
-
-exports.deleteOrder=catchasyncerror(async(req,res,next)=>{
-    const order=await Order.findById(req.params.id);
-
-    if(!order){
-        return next(new ErrorHandler("Invalid Order Id",400));
+    if (!order) {
+        return next(new ErrorHandler("Invalid Order Id", 400));
     }
 
     await order.remove();
 
     res.status(200).json({
-        success:true,
-        message:"Order deleted"
+        success: true,
+        message: "Order deleted"
     })
 
 
