@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom'
 import './Profile.css'
 import { Link } from 'react-router-dom'
+import { Button, Col, Container, Row } from "react-bootstrap"
 const Profile = () => {
     const navigate = useNavigate();
     const { isAuthenticated, error, user, loading } = useSelector((state) => state.user);
@@ -13,21 +14,81 @@ const Profile = () => {
     return (
         <Fragment>
             {loading === false && (
-                <div className="customContainer-2-1-1">
+                <Container>
+                    <div className="customContainerProfile-1">
+                        <p className="customTitleProfile-1-3">User Profile</p>
 
-                    <h2>{user.name}</h2>
-                    <h4>{user.emailId}</h4>
-                    <h4>{user.contactNumber}</h4>
-                    <div>
-                        <Link to="/profile/update">Update profile</Link>
-                        <br />
-                        <Link to="/profile/password/update">Change Password</Link>
-                        <br />
-                        <Link to="/profile/orders">Orders</Link>
+                        <Row >
 
+                            <Col xs={12} md={6}>
+                                <Row>
+                                    <Button className="customButtonProfile-1-1">
+                                        Update profile
+                                    </Button>
+                                </Row>
+                                <Row>
+                                    <Button className="customButtonProfile-1-1">
+                                        Change Password
+                                    </Button>
+                                </Row>
+                                <Row>
+                                    <Button className="customButtonProfile-1-1">
+                                        Orders
+                                    </Button>
+                                </Row>
+
+
+
+      
+
+
+                            </Col>
+                            <Col xs={12} md={6}>
+                                <Row>
+                                    <Col xs="auto">
+                                        <p className="customTitleProfile-1-2">Welcome,</p>
+                                    </Col>
+
+                                    <Col>
+                                        <p className="customTitleProfile"> {user.name}</p>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <p className="customTitleProfile-1" >UserName :- </p>
+                                    </Col>
+                                    <Col>
+                                        <p className="customTitleProfile-1-1" >{user.name} </p>
+
+                                    </Col>
+
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <p className="customTitleProfile-1" >EmailId :- </p>
+                                    </Col>
+                                    <Col>
+                                        <p className="customTitleProfile-1-1" > {user.emailId} </p>
+
+                                    </Col>
+
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <p className="customTitleProfile-1" >Contact Number :- </p>
+                                    </Col>
+                                    <Col>
+                                        <p className="customTitleProfile-1-1" >{user.contactNumber} </p>
+
+                                    </Col>
+
+                                </Row>
+                            </Col>
+                        </Row>
                     </div>
-                   
-                </div>
+                </Container>
+
+
             )}
 
         </Fragment>

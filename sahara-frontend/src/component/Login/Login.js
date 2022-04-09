@@ -11,16 +11,30 @@ const Login = () => {
     const [password, setPassword] = useState();
     const [emailError, setEmailError] = useState();
     const [passwordError, setPasswordError] = useState();
+
+    const [loginError, setLoginError] = useState();
+
+
     const location = useLocation();
     const navigate = useNavigate();
 
-    const { error, user, isAuthenticated } = useSelector(state => state.user);
+    const { error, loading, isAuthenticated } = useSelector(state => state.user);
 
 
     const loginUser = (e) => {
         e.preventDefault();
+        if (!email || email === "" || emailError || !password || password === "" || passwordError) {
+            if (!email || email === "" || emailError) {
+                setEmailError("Please enter valid EmailId");
+            }
+            if (!password || password === "" || passwordError) {
+                setPasswordError("Enter Valid Password");
+            }
+        }
+        else {
+            dispatch(userLogin(email, password))
+        }
 
-        dispatch(userLogin(email, password))
 
     }
 
@@ -33,9 +47,14 @@ const Login = () => {
             else
                 navigate("/shipping");
         }
-    }, [dispatch, error, isAuthenticated, newPath]);
+        if (email && email !== "" && error) {
+            setLoginError("Wrong Email or Password")
+        }
+
+    }, [dispatch, error, isAuthenticated, newPath,loading]);
 
     const verifyEmail = (event) => {
+        setLoginError("")
         let eIdregex = /^[a-z]+[@][a-z]+\.[com]+$/;
         let value = event.target.value;
         if (!value || value === "") {
@@ -52,10 +71,13 @@ const Login = () => {
     }
     // need to imlement to show error to user if password is wrong
     const verifyPassword = (event) => {
-
+        setLoginError("")
         let value = event.target.value;
         if (!value || value === "") {
             setPasswordError("Password required");
+
+        } else if (value.length < 9) {
+            setPasswordError("Password should be greater than 8 words");
 
         } else {
             setPasswordError("");
@@ -70,18 +92,18 @@ const Login = () => {
     return (
         <Fragment>
             <div className="customContainer-1">
-
+                <p className="customTitle-1-4">LOGIN</p>
 
                 <Form className="customForm" onSubmit={loginUser}>
                     <Form.Group className="mb-3" >
-                        <Form.Label>Email address</Form.Label>
+                        <Form.Label >Email address</Form.Label>
                         <Form.Control
                             type="email"
                             placeholder="Enter email"
-
+                            className="customTitle-1-5 shadow-none"
                             onChange={(e) => verifyEmail(e)}
-                            required />
-                        <Form.Text className="text-danger">
+                        />
+                        <Form.Text className="customTitle-1-6 text-danger">
                             {emailError}
                         </Form.Text>
                     </Form.Group>
@@ -91,22 +113,26 @@ const Login = () => {
                         <Form.Control
                             type="password"
                             placeholder="Enter Password"
+                            className="customTitle-1-5 shadow-none"
 
-                            required
                             onChange={(e) => verifyPassword(e)}
                         />
-                        <Form.Text className="text-danger">
+                        <Form.Text className="customTitle-1-6 text-danger">
                             {passwordError}
+                        </Form.Text>
+                        <Form.Text className="customTitle-1-6 text-danger">
+                            {loginError}
                         </Form.Text>
                     </Form.Group>
                     <Form.Group className="mb-3" >
-                        <Form.Text className="text-muted">
+                        <Form.Text className="text-muted customTitle-1-6 ">
                             never share your email or password with anyone else.
                         </Form.Text>
                     </Form.Group>
-                    <Button variant="primary" type="submit"  >
-                        Submit
+                    <Button type="submit" className="customTitle-1-7 shadow-none"  >
+                        Login
                     </Button>
+
 
 
                 </Form>

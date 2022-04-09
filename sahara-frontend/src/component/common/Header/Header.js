@@ -33,7 +33,7 @@ const Header = () => {
     useEffect(() => {
         WebFont.load({
             google: {
-                families: ["Libre Baskerville","Michroma", "Merienda", "Rajdhani", "Orbitron","Satisfy"],
+                families: ["Libre Baskerville","Michroma", "Merienda", "Rajdhani", "Orbitron","Satisfy","Cinzel","Prata"],
             },
         });
     }, [])

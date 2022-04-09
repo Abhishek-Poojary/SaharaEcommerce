@@ -1,7 +1,44 @@
-.customContainer-2-1-1{
-    display: flex;
-    flex-wrap: wrap;
-    width: 80vmax;
-    justify-content: center;
-    margin: 2vmax auto;
+.customContainerProfile-1{
+    margin-top: 2vmax;
+   margin-bottom: 5vmax;
+}
+
+.customTitleProfile{
+    font:2rem "Michroma";
+}
+
+
+
+
+.customTitleProfile-1{
+    margin-top: 1vmax;
+    font:1.5rem "Cinzel";
+}
+
+.customTitleProfile-1-1{
+    margin-top: 1vmax;
+    font:1.5rem "Prata";
+}
+
+.customTitleProfile-1-2{
+    font:2rem "Michroma";
+   color: red;
+}
+
+
+.customTitleProfile-1-3{
+    font:1.6rem "Michroma";
+
+}
+.customButtonProfile-1-1{
+    margin-top: 2vmax;
+    width: 70%;
+
+}
+
+@media only screen and (max-width:593px){
+    .customButtonProfile-1-1{
+        width: -webkit-fill-available;
+        margin-bottom: 2vmax;
+    }
 }

@@ -1,15 +1,66 @@
-.customContainer-2{
+.customContainer-2 {
     display: flex;
     margin: 2vmax auto;
     padding: 4vmax;
     width: 50vw;
-    border: solid 1px;
-    border-color: darkslategray;
     flex-wrap: wrap;
-    justify-content: center;
-    background-color: aliceblue;
+
 }
 
-.customForm{
+.customForm {
     width: 100%;
 }
+
+.customTitle-1-4 {
+    margin-bottom: 20px;
+    text-align: left;
+    border-bottom: 1px solid gray;
+    font: 1.3rem "Michroma"
+}
+
+Form Label {
+    color: grey;
+    text-align: left;
+    font: 1.3rem "Rajdhani"
+}
+
+
+.customTitle-1-5 {
+    text-align: left;
+    font: 1.1rem "Michroma";
+    border: none;
+    border-bottom: 1px solid black;
+}
+
+
+
+.customTitle-1-5:focus {
+    text-decoration: none;
+}
+
+
+.customTitle-1-6 {
+    font: 1.3rem "Rajdhani"
+ }
+
+ .customTitle-1-7 {
+    font: 1.3rem "Rajdhani";
+    background-color: black;
+    color: white;
+    width: 100%;
+ }
+
+ .customButton-1-7:hover{
+    background-color: black;
+    color: white;
+  }
+
+@media only screen and (max-width:800px){
+    .customContainer-2 {
+        margin: auto;
+        width: auto;
+    
+    }
+    
+}
+
