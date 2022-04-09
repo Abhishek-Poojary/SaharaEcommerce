@@ -18,7 +18,7 @@ const Products = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
     const { products, error, productsCount, limitNumberOfPages } = useSelector(state => state.products);
-
+   
     useEffect(() => {
         dispatch(getAllProducts(keyword, currentPage, price));
     }, [dispatch, keyword, currentPage])
@@ -37,9 +37,16 @@ const Products = () => {
         <Fragment>
             <div className="customContainer" id="customContainer">
 
-                {products && products.map((product) => (
+                {products.length >0  ? products.map((product) => (
                     <ProductCard product={product} key={product._id} />
-                ))}
+                )):(
+                    <div className="customNoProductMessage mt-5 mb-3">
+                        <h3>No products found for searched name or price</h3>
+                        <h3>Please try searching again with different brand or price</h3>
+                    </div>
+                )}
+
+                
 
             </div>
             <div className="customMenu">

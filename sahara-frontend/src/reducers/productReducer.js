@@ -58,14 +58,17 @@ export const productDetailsReducer = (state = { product: [] }, action) => {
         case REQUEST_FOR_PRODUCTS_DETAILS:
             return {
                 ...state,
+                loading:true,
             }
         case REQUEST_FOR_PRODUCTS_DETAILS_FAIL:
             return {
                 error: action.payload,
+                loading:false,
             }
         case REQUEST_FOR_PRODUCTS_DETAILS_SUCCESS:
             return {
-                product: action.payload
+                product: action.payload,
+                loading:false,
             }
 
         case CLEAR_ERROR:

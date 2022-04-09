@@ -20,6 +20,13 @@
     top: 10vmax;
 }
 
+.customNoProductMessage{
+    width: 100%;
+    text-align: center;
+    font: 1.3rem "Satisfy";
+    height: 16vmax;
+}
+
 
 @media only screen and (max-width:900px) {
 

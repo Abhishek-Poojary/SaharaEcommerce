@@ -7,60 +7,99 @@ import { Row, Col, Image } from "react-bootstrap";
 import { userAddToCart } from "../../../actions/cartAction";
 
 const Product = () => {
-    const dispatch = useDispatch();
-    const {id} =useParams();
-    const { product, error } = useSelector((state) => state.product)
-    useEffect(() => {
-        dispatch(getProductDetails(id));
-    }, [dispatch,id])
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const { product, error, loading } = useSelector((state) => state.product)
 
-    const [count,setCount]=useState(0);
 
-    const addCount = () => {
-      if (product.inStock <= count) return;
 
-      setCount(count+1);
-    };
+  const [count, setCount] = useState(0);
+  const [imageUrl, SetImageUrl] = useState();
+
+
+  const [buttonValue, setButtonValue] = useState("Add To Cart");
+  const [customValue, setCustomValue] = useState("");
+
+
+  useEffect(() => {
+    dispatch(getProductDetails(id));
+  }, [dispatch, id ])
+
+  const addCount = () => {
+    if (product.inStock <= count) return;
+
+    setCount(count + 1);
+  };
+
+  const decreaseCount = () => {
+    if (0 >= count) return;
+
+    setCount(count - 1);
+  };
+
+  const addToCart = () => {
   
-    const decreaseCount = () => {
-      if (1 >= count) return;
+   
+      if (count > 0) {
+        setButtonValue("Product added");
+        dispatch(userAddToCart(id, count))
+        setCustomValue("bg-success text-white")
+      }else{
+        setButtonValue("Please Add Count");  
+        setCustomValue("bg-black text-white")
+      }
+   
+    
 
-      setCount(count-1);
-    };
-  
-    const addToCart=()=>{
-     dispatch(userAddToCart(id,count))
-      console.log("product added");
-    }
-    return (<Fragment>
-        <Row className="customContainer">
-            <Col md={6} >
-                <Image src=
-                    "https://res.cloudinary.com/dbunwmh8z/image/upload/v1648531024/samples/ecommerce/accessories-bag.jpg"  className="customImage" rounded />
-            </Col>
-            <Col className="customDisplay">
-                <h1>{product.name}</h1>
-                <p>{product.description}</p>
-                <p>{product.price}</p>
-                <p>Stocks left :{product.inStock}</p>
-                <div >
-                  <div className="customInput">
-                    <button className="customButton-1-1" onClick={addCount}>+</button>
-                    <input readOnly type="number" value={count} />
-                    <button className="customButton-1-2" onClick={decreaseCount} >-</button>
-                  </div>
-                  <button className="customButton-1-3"
-                    disabled={product.inStock < 1 ? true : false}  
-                    onClick={addToCart}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-            </Col>
-        </Row>
-    </Fragment>
+    setTimeout(()=>{
+      setButtonValue("Add To Cart");
+      setCustomValue("")
+    },2000)
 
-    )
+
+
+  }
+  const changeImage = (url) => {
+    SetImageUrl(url);
+  }
+
+  return (<Fragment>
+    {loading === false && (
+      <Row className="customContainer-4-1">
+        <Col md={2}>
+          {product && product.images.map((image, index) => (
+            <Image key={index} src={image.url} alt="Product Preview" onClick={(e) => SetImageUrl(image.url)} className="customImageProduct" />
+          ))}
+        </Col>
+        <Col md={6} >
+          <Image src={imageUrl ? imageUrl : product.images[0].url} className="customImage" rounded height={"300vmax"} />
+        </Col>
+        <Col className="customDisplay">
+          <p className="customTitle-1">{product.name}</p>
+          <p className="customTitle-1-1">{product.description}</p>
+          <p className="customTitle-1-2">$ {product.price}</p>
+          <p className="customTitle-1-3">{product.inStock} Stocks left</p>
+          
+          <div >
+            <div className="customInput">
+              <button className="customButton-1-1" onClick={addCount}>+</button>
+              <input readOnly type="number" value={count} />
+              <button className="customButton-1-2" onClick={decreaseCount} >-</button>
+            </div>
+            <button className={product.inStock>0 ? `customButton-1-3 ${customValue}`:"customButton-1-3 bg-info text-white"}
+              disabled={product.inStock < 1 ? true : false}
+              onClick={addToCart}
+            >
+              {product.inStock>0 ? buttonValue : "No Stock Available"}
+            </button>
+          </div>
+        </Col>
+      </Row>
+    )}
+
+  </Fragment>
+
+  )
 }
 
 

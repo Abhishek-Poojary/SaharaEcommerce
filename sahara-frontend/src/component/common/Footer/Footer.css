@@ -1,3 +1,12 @@
 footer {
-    background-color: lemonchiffon;
+    background-color: mintcream;
+}
+
+.link-unstyled{
+    color: black;
+    text-decoration: none;
+}
+
+.link-unstyled:hover{
+    color: silver;
 }

@@ -3,3 +3,19 @@
     color: black;
     margin: 2vmax;
 }
+
+.customLink:hover{
+    text-decoration:  none;
+    color: black;
+}
+
+
+.customImage-1{
+    width: 100%;
+    height: 100%;
+}
+
+.customCardTitle{
+    font: 1.3rem "Libre Baskerville";
+}
+
