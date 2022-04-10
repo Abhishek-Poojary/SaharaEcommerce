@@ -1,40 +1,42 @@
 import { Fragment } from "react"
-import { Card, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import "./OrderList.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const OrderList = (props) => {
-    const { order } = props
+    const { order, index } = props
+    const navigate = useNavigate();
 
+    const customButton = (id) => {
+        navigate(`/profile/order/${id}`)
+    }
     return (
         <Fragment>
-            <Row>
-                <Col>
-                    <h2>Order Items</h2>
+
+
+            <tr>
+                <td className="customTitleOrderList-1">{index + 1}</td>
+                <td>
+
                     {order.orderItems.map((data) => (
-                        <div key={data._id}>
-                            <h4>{data.name}</h4>
-                            <h4>{data.price}</h4>
-                            <h4>{data.quantity}</h4>
+                        <Row key={data._id} className="customHR">
 
-                        </div>
+                            <Col className="customTitleOrderList-1" md={4}>{data.name}</Col>
+                            <Col className="customTitleOrderList-1" md={3}>${data.price}</Col>
+                            <Col className="customTitleOrderList-1" md={4}>{data.quantity} Products</Col>
 
+                        </Row>
+                        
                     ))}
-                </Col>
-                <Col>
-                    {order.totalPrice}
-                </Col>
-                <Col>
-                    <Link to={`/profile/order/${order._id}`}>View Order Details</Link>
-                </Col>
-                <Col>
-                    <h1>{order.orderStatus}</h1>
 
-                </Col>
-            </Row>
+                </td>
 
 
 
+                <td className="customTitleOrderList-1"> {order.totalPrice}</td>
+                <td className="customTitleOrderList-1"> <Button onClick={() => customButton(order._id)}>View Order Details</Button></td>
+                <td className="customTitleOrderList-1"> {order.orderStatus}</td>
+            </tr>
 
         </Fragment>
     )

@@ -1,3 +1,21 @@
 .customList{
     display: flex;
 }
+
+.customContainerProfile-1-8{
+   background-color: paleturquoise;
+   padding: 1vmax;
+   border: 1px solid black;
+}
+
+
+.customTitleOrderList-1{
+    margin-top: 1vmax;
+    font:1.3rem "Rajdhani";
+}
+
+@media only screen and (max-width:700px) {
+    .customHR{
+        border-bottom: 1px solid;
+    }
+}

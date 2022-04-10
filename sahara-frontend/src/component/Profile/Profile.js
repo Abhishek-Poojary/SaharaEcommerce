@@ -10,6 +10,15 @@ const Profile = () => {
 
 
 
+    const UpdateProfile=()=>{
+        navigate("/profile/update");
+    }
+    const UpdatePassword=()=>{
+        navigate("/profile/password/update");
+    }
+    const UserOrders=()=>{
+        navigate("/profile/orders");
+    }
 
     return (
         <Fragment>
@@ -22,25 +31,20 @@ const Profile = () => {
 
                             <Col xs={12} md={6}>
                                 <Row>
-                                    <Button className="customButtonProfile-1-1">
+                                    <Button className="customButtonProfile-1-1" onClick={UpdateProfile}>
                                         Update profile
                                     </Button>
                                 </Row>
                                 <Row>
-                                    <Button className="customButtonProfile-1-1">
-                                        Change Password
+                                    <Button className="customButtonProfile-1-1" onClick={UpdatePassword}>
+                                       Update Password
                                     </Button>
                                 </Row>
                                 <Row>
-                                    <Button className="customButtonProfile-1-1">
-                                        Orders
+                                    <Button className="customButtonProfile-1-1" onClick={UserOrders}>
+                                        All Orders
                                     </Button>
                                 </Row>
-
-
-
-      
-
 
                             </Col>
                             <Col xs={12} md={6}>

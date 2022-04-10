@@ -1,4 +1,10 @@
 .customOrderList{
-    flex-direction: column;
+    margin-top: 2vmax;
+    margin-bottom: 6vmax;
     
+}
+
+.customTitleUserOrder-1{
+    margin-top: 1vmax;
+    font:1.5rem "Rajdhani";
 }

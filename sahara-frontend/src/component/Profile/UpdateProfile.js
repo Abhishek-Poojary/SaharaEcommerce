@@ -10,9 +10,9 @@ const UpdateProfile = () => {
 
     const [err, setError] = useState();
 
-    const [name, setName] = useState();
-    const [email, setEmail] = useState();
-    const [phoneNo, setPhoneNo] = useState();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phoneNo, setPhoneNo] = useState("");
 
     const [nameError, setNameError] = useState();
     const [emailError, setEmailError] = useState();
@@ -25,7 +25,7 @@ const UpdateProfile = () => {
         if (user) {
             setName(user.name);
             setEmail(user.emailId)
-            setPhoneNo(user.contactNumber)  //showing error as we are using these in the form as values
+            setPhoneNo(user.contactNumber)  
         }
 
 
@@ -48,6 +48,18 @@ const UpdateProfile = () => {
         e.preventDefault();
         if (user.name === name && user.emailId === email && user.contactNumber === phoneNo) {
             setError("No Change has been made")
+        }else if (!name || !email || !phoneNo  || nameError || emailError || phoneNoError ) {
+            if (!name || name === "" || nameError ) {
+                setNameError("Please enter your Name");
+            }
+            if (!email || email === "" || emailError ) {
+                setEmailError("Please enter your EmailId");
+            }
+
+            if (!phoneNo || phoneNo === "" || phoneNoError) {
+                setPhoneNoError("Please enter your Phone Number");
+            }
+            
         } else {
             const data = {
                 name,
@@ -63,10 +75,16 @@ const UpdateProfile = () => {
         let value = event.target.value;
         if (!value || value === "") {
             setNameError("Please enter your Name");
-
+            setName(value);
         } else if (!value.match(nameregex)) {
             setNameError("Please enter a valid Name");
+            setName(value);
 
+        } else if (value.length > 11) {
+            setNameError("UserName cannot be greater than 11");
+            setTimeout(()=>{
+                setNameError();
+            },2000)
         } else {
             setNameError("");
             setName(value);
@@ -80,10 +98,10 @@ const UpdateProfile = () => {
         let value = event.target.value;
         if (!value || value === "") {
             setEmailError("Please enter your EmailId");
-
+            setEmail(value);
         } else if (!value.match(eIdregex)) {
             setEmailError("Please enter a valid Emailid");
-
+            setEmail(value);
         } else {
             setEmailError("");
             setEmail(value);
@@ -97,10 +115,10 @@ const UpdateProfile = () => {
         let value = event.target.value;
         if (!value || value === "") {
             setPhoneNoError("Please enter your Phone Number");
-
+            setPhoneNo(value);
         } else if (!value.match(cnoRegex)) {
             setPhoneNoError("Please enter a valid Phone Number");
-
+            setPhoneNo(value);
         } else {
             setPhoneNoError("");
             setPhoneNo(value);
@@ -111,42 +129,42 @@ const UpdateProfile = () => {
     return (
         <Fragment>
             <div className="customContainer-2">
-                <h3>Update Profile</h3>
+            <p className="customTitle-1-4">Update Profile</p>
                 <Form className="customForm" onSubmit={UpdateUser}>
 
                     <Form.Group className="mb-3" >
                         <Form.Label>Name</Form.Label>
-                        <Form.Control type="text" placeholder="Enter Name" value={name} onChange={(e) => verifyName(e)} />
-                        <Form.Text className="text-danger">
+                        <Form.Control className="customTitle-1-5 shadow-none" type="text" placeholder="Enter Name" value={name} onChange={(e) => verifyName(e)} />
+                        <Form.Text   className="customTitle-1-6 text-danger">
                             {nameError}
                         </Form.Text>
                     </Form.Group>
                     <Form.Group className="mb-3" >
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => verifyEmail(e)} />
-                        <Form.Text className="text-danger">
+                        <Form.Control  className="customTitle-1-5 shadow-none" type="email" placeholder="Enter email" value={email} onChange={(e) => verifyEmail(e)} />
+                        <Form.Text   className="customTitle-1-6 text-danger">
                             {emailError}
                         </Form.Text>
                     </Form.Group>
 
                     <Form.Group className="mb-3" >
                         <Form.Label>Contact Number</Form.Label>
-                        <Form.Control type="te" placeholder="Enter your Phone Number" value={phoneNo} onChange={(e) => verifyPhoneNo(e)} />
-                        <Form.Text className="text-danger">
+                        <Form.Control className="customTitle-1-5 shadow-none" type="number" placeholder="Enter your Phone Number" value={phoneNo} onChange={(e) => verifyPhoneNo(e)} />
+                        <Form.Text   className="customTitle-1-6 text-danger">
                             {phoneNoError}
                         </Form.Text>
                     </Form.Group>
 
 
-                    <Button variant="primary" type="submit">
+                    <Button  className="customTitle-1-7 shadow-none" type="submit">
                         Update
                     </Button>
 
 
-                    <Button variant="secondary" type="button" onClick={()=>navigate(-1)}>
+                    <Button  className="customTitle-1-7 shadow-none" type="button" onClick={()=>navigate(-1)}>
                         Cancel
                     </Button>
-                    <Form.Text className="text-danger">
+                    <Form.Text   className="customTitle-1-6 text-danger">
                         {err}
                     </Form.Text>
                 </Form>

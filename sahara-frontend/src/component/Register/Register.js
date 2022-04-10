@@ -35,17 +35,17 @@ const Register = () => {
     const submitUser = (e) => {
         e.preventDefault();
         if (!name || !email || !phoneNo || !password || nameError || emailError || phoneNoError || passwordError) {
-            if (!name || name === "") {
+            if (!name || name === "" || nameError) {
                 setNameError("Please enter your Name");
             }
-            if (!email || email === "") {
+            if (!email || email === "" || emailError) {
                 setEmailError("Please enter your EmailId");
             }
 
-            if (!phoneNo || phoneNo === "") {
+            if (!phoneNo || phoneNo === "" || phoneNoError) {
                 setPhoneNoError("Please enter your Phone Number");
             }
-            if (!password || password === "") {
+            if (!password || password === "" || passwordError) {
                 setPasswordError("Password required");
             }
             
