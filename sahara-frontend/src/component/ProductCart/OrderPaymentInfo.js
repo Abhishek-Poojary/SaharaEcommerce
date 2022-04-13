@@ -23,23 +23,23 @@ const OrderPaymentInfo = () => {
     const month = date.getMonth();
     const year = date.getFullYear();
 
-    const sessionInfo= JSON.parse(sessionStorage.getItem("orderInfo"));
+    const sessionInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
 
-    const{shippingInfo ,cartItems } =useSelector((state)=>state.cart)
+    const { shippingInfo, cartItems } = useSelector((state) => state.cart)
 
-    const dispatch=useDispatch();  
+    const dispatch = useDispatch();
 
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
-    const data={
+    const data = {
         shippingInfo,
-        orderItems:cartItems,
+        orderItems: cartItems,
         itemsPrice: sessionInfo.subtotal,
         taxPrice: sessionInfo.tax,
         shippingPrice: sessionInfo.shippingCharges,
         totalPrice: sessionInfo.totalPrice,
-        paymentInfo:{
-            status:"success"
+        paymentInfo: {
+            status: "success"
         }
     }
 
@@ -47,14 +47,32 @@ const OrderPaymentInfo = () => {
     const userOrder = (e) => {
         e.preventDefault();
         verifyDate();
-        dispatch(newOrder(data))
 
-        navigate("/order/success")
+        if (cardError || expMonthError || expDateError || cvvError || !card || card === "" || !cvv || cvv === "") {
+            if (!card || card === "" || cardError) {
+                setCardError("Please enter a valid Card Number");
+
+            }
+            if (!cvv || cvv === "" || cvvError) {
+                setCVVError("Please enter a valid CVV");
+
+            }
+            if (expMonthError !== "" || expDateError !== "") {
+
+            }
+        } else {
+
+            dispatch(newOrder(data))
+
+            navigate("/order/success")
+
+        }
+
     }
 
     const verifyCreditCard = (event) => {
         let regex = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-        let regex1 = /^(?:5[1-5][0-9]{14})$/;
+
         let value = event.target.value;
         if (!value || value === "") {
             setCardError("Please enter card number");
@@ -66,32 +84,6 @@ const OrderPaymentInfo = () => {
             setCardError("");
             setCard(value);
         }
-
-    }
-
-
-
-    const verifyDate = () => {
-
-        console.log(expMonth)
-        if (!expYear || expYear === "Enter year") {
-            setExpDateError("Please select a year");
-
-        } else if (!expMonth || expMonth === "Enter month") {
-            setExpDateError("");
-            setExpMonthError("Please select month");
-        }
-        else if (year > expYear || (year === expYear && month > expMonth)) {
-
-            setExpMonthError("");
-            setExpDateError("The expiry date is before today's date. Please select a valid expiry date");
-
-        } else {
-            setExpMonthError("");
-            setExpDateError("");
-
-        }
-
 
     }
 
@@ -116,21 +108,46 @@ const OrderPaymentInfo = () => {
     }
 
 
+    const verifyDate = () => {
+
+        if (!expYear || expYear === "0") {
+            setExpDateError("Please select a year");
+
+        } else if (!expMonth || expMonth === "0") {
+            setExpDateError("");
+            setExpMonthError("Please select month");
+        }
+        else if (year > expYear || (year == expYear && month > expMonth)) {
+
+            setExpMonthError("");
+            setExpDateError("The expiry date is before today's date. Please select a valid expiry date");
+
+        } else {
+            setExpMonthError("");
+            setExpDateError("");
+
+        }
+    }
+
+
+
+
     return (
         <Fragment>
             <div className="customContainer-2">
+            <p className="customTitle-1-4">Payment-Info</p>
                 <Form className="customForm" onSubmit={userOrder}>
 
                     <Form.Group className="mb-3" >
                         <Form.Label>Credit Card Number</Form.Label>
-                        <Form.Control type="number" placeholder="Enter Credit Card Number" onChange={(e) => verifyCreditCard(e)} />
-                        <Form.Text className="text-danger">
+                        <Form.Control className="customTitle-1-5 shadow-none" type="number" placeholder="Enter Credit Card Number" onChange={(e) => verifyCreditCard(e)} />
+                        <Form.Text className="customTitle-1-6 text-danger">
                             {cardError}
                         </Form.Text>
                     </Form.Group>
                     <Form.Group className="mb-3" >
                         <Form.Label>Expiry Month</Form.Label>
-                        <Form.Select aria-label="Default select example" value={expMonth} onChange={(e) => setExpMonth(e.target.value)}>
+                        <Form.Select className="customTitle-1-5 shadow-none" aria-label="Default select example" value={expMonth} onChange={(e) => setExpMonth(e.target.value)}>
                             <option value="0">Enter month</option>
                             <option value="01">January</option>
                             <option value="02">February</option>
@@ -145,14 +162,14 @@ const OrderPaymentInfo = () => {
                             <option value="11">November</option>
                             <option value="12">December</option>
                         </Form.Select>
-                        <Form.Text className="text-danger">
+                        <Form.Text className="customTitle-1-6 text-danger">
                             {expMonthError}
                         </Form.Text>
                     </Form.Group>
 
                     <Form.Group className="mb-3" >
                         <Form.Label>Expiry Year</Form.Label>
-                        <Form.Select aria-label="Default select example" value={expYear} onChange={(e) => setExpYear(e.target.value)}>
+                        <Form.Select className="customTitle-1-5 shadow-none" aria-label="Default select example" value={expYear} onChange={(e) => setExpYear(e.target.value)}>
                             <option value="0">Enter year</option>
                             <option value="2013">2013</option>
                             <option value="2014">2014</option>
@@ -174,15 +191,15 @@ const OrderPaymentInfo = () => {
                             <option value="2030">2030</option>
                             <option value="2031">2031</option>
                         </Form.Select>
-                        <Form.Text className="text-danger">
+                        <Form.Text className="customTitle-1-6 text-danger">
                             {expDateError}
                         </Form.Text>
                     </Form.Group>
 
                     <Form.Group className="mb-3" >
                         <Form.Label>CVV</Form.Label>
-                        <Form.Control type="te" placeholder="" onChange={(e) => verifyCVV(e)} />
-                        <Form.Text className="text-danger">
+                        <Form.Control className="customTitle-1-5 shadow-none" type="te" placeholder="" onChange={(e) => verifyCVV(e)} />
+                        <Form.Text className="customTitle-1-6 text-danger">
                             {cvvError}
                         </Form.Text>
                     </Form.Group>
@@ -190,7 +207,7 @@ const OrderPaymentInfo = () => {
 
 
 
-                    <Button constiant="primary" type="submit">
+                    <Button className="customTitle-1-7 shadow-none" type="submit">
                         Order
                     </Button>
                 </Form>

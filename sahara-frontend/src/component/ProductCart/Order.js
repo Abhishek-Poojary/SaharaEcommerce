@@ -1,31 +1,31 @@
 import { Fragment } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Table, Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const Order = () => {
-    const navigate= useNavigate();
+    const navigate = useNavigate();
     const { shippingInfo, cartItems } = useSelector((state) => state.cart);
     const { user } = useSelector((state) => state.user);
-  
-    const subtotal = cartItems.reduce(
+
+    const totalforProduct = cartItems.reduce(
         (sum, item) => sum + item.quantity * item.price,
         0
     );
 
-    const shippingCharges = subtotal > 1000 ? 0 : 200;
+    const shippingCharges = 200;
 
-    const tax = subtotal * 0.18;
+    const tax = totalforProduct * 0.09;
 
-    const totalPrice = subtotal + tax + shippingCharges;
-
-    const address = `${shippingInfo.address}, ${shippingInfo.city}, ${shippingInfo.state}, ${shippingInfo.pinCode}, ${shippingInfo.country}`;
+    const totalPrice = totalforProduct + tax + shippingCharges;
 
 
-    const orderConfirmed=()=>{
-        const order={
-            subtotal,
+
+
+    const orderConfirmed = () => {
+        const order = {
+            totalforProduct,
             shippingCharges,
             tax,
             totalPrice
@@ -35,71 +35,97 @@ const Order = () => {
         navigate("/order/paymentInfo")
     }
 
+    const ProductNavigate = (id) => {
+        navigate(`/product/${id}`);
+    }
     return (
         <Fragment>
             {user && (  //after clinking on product and coming bak this page gts error so added usercheck
-                <Container>
-                    <Col>
+                <div className="customCart-1">
+                    <Container>
                         <Row>
-                            <h3>User name:</h3>{user.name}
-                        </Row>
-                        <Row>
-                            <h3>Phone no:</h3>{shippingInfo.phoneNo}
-                        </Row>
-                        <Row>
-                            <h3>address:</h3>{address}
+                            <Col>
+                                <p className="customTitleProfile-1-3">Confirm Your Order and Address</p>
+                            </Col>
+
+
                         </Row>
 
-                        <Row>
-                            <h3>your cart Items</h3>
-                            {cartItems && cartItems.map((item) => (
-                                <div key={item.product}>
-                                    <img src="https://res.cloudinary.com/dbunwmh8z/image/upload/v1648531024/samples/ecommerce/accessories-bag.jpg" width={"80vmax"} />
-                                    <Link to={`/product/${item.product}`}>
-                                        {item.name}
-                                    </Link>
-                                    <span>
-
-                                    </span>
 
 
-                                </div>
-                            ))}
+                        <Row >
+                            <Table>
+                                <thead>
+                                    <tr>
+                                        <th>Product Name </th>
+                                        <th> Product Price</th>
+                                        <th>Product quantity</th>
+                                        <th>Product</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {cartItems.map((data, index) => (
+
+                                        <tr key={index} className="customHR">
+
+                                            <th className="customTitleOrderList-1" md={4}>{data.name}</th>
+                                            <th className="customTitleOrderList-1" md={3}>${data.price}</th>
+                                            <th className="customTitleOrderList-1" md={4}>{data.quantity} Products</th>
+                                            <th>
+                                                <Button onClick={() => ProductNavigate(data.product)} >View Product</Button>
+                                            </th>
+                                        </tr>
+
+                                    ))}
+                                    <tr>
+
+                                        <th>Total Price for Products</th>
+                                        <th> ${totalforProduct}</th>
+                                    </tr>
+                                    <tr>
+
+                                        <th>Total Tax for Products</th>
+                                        <th> ${tax} </th>
+                                    </tr>
+                                    <tr>
+
+                                        <th>Shipping Price</th>
+                                        <th> ${shippingCharges} </th>
+                                    </tr>
+
+                                    <tr>
+
+                                        <th>Total Payment</th>
+                                        <th> ${totalPrice} </th>
+                                    </tr>
+                                </tbody>
+                            </Table>
+
+
                         </Row>
                         <Row>
-
-                            <div>
-                                <div >
-                                    <h3>Your Order Summary</h3>
-                                    <div>
-                                        <div>
-                                            <p>Subtotal:</p>
-                                            <span>₹{subtotal}</span>
-                                        </div>
-                                        <div>
-                                            <p>Shipping Charges:</p>
-                                            <span>₹{shippingCharges}</span>
-                                        </div>
-                                        <div>
-                                            <p>GST:</p>
-                                            <span>₹{tax}</span>
-                                        </div>
-                                    </div>
-
-                                    <div className="orderSummaryTotal">
-                                        <p>
-                                            <b>Total:</b>
-                                        </p>
-                                        <span>₹{totalPrice}</span>
-                                    </div>
-
-                                    <button onClick={orderConfirmed}>Proceed To Payment</button>
-                                </div>
-                            </div>
+                            <p className="customTitleProfile-1-3">Shipping Address</p>
+                            <Col xs={12} md={3}>
+                                <p className="customTitleOrderList-1">Address</p>
+                                <p className="customTitleOrderList-1">City</p>
+                                <p className="customTitleOrderList-1">pinCode</p>
+                                <p className="customTitleOrderList-1">Phone Number</p>
+                                <p className="customTitleOrderList-1">State</p>
+                                <p className="customTitleOrderList-1">Country</p>
+                            </Col>
+                            <Col xs={12} md={3}>
+                                <p className="customTitleOrderList-1">{shippingInfo.address}</p>
+                                <p className="customTitleOrderList-1">{shippingInfo.city}</p>
+                                <p className="customTitleOrderList-1">{shippingInfo.pinCode}</p>
+                                <p className="customTitleOrderList-1">{shippingInfo.phoneNo}</p>
+                                <p className="customTitleOrderList-1">{shippingInfo.state}</p>
+                                <p className="customTitleOrderList-1">{shippingInfo.country}</p>
+                            </Col>
                         </Row>
-                    </Col>
 
-                </Container>
+                        <Button onClick={orderConfirmed}>Proceed To Payment</Button>
+                    </Container>
+                </div>
             )}
 
         </Fragment>

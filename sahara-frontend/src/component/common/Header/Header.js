@@ -41,12 +41,12 @@ const Header = () => {
         <Fragment>
             <Navbar collapseOnSelect sticky="top" expand="lg" bg="light" className="py-2 border-bottom" variant="light" >
                 <Container>
-                    <Navbar.Brand className="customBrand">SAHARA</Navbar.Brand>
+                <Navbar.Brand > <Nav.Link href="/" className="customBrand">SAHARA</Nav.Link></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="p-2 flex-fill">
-                            <Nav.Link href="/">HOME</Nav.Link>
+                        <Nav className="p-2 flex-fill">   
                             <Nav.Link href="/products">PRODUCTS</Nav.Link>
+                            <Nav.Link href="/cart">CART</Nav.Link>
                         </Nav>
                         <Nav className="p-2 flex-fill">
                             <Form className="d-flex flex-fill" onSubmit={submitSearch}>
