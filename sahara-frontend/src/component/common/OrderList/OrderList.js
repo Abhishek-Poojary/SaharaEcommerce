@@ -15,7 +15,7 @@ const OrderList = (props) => {
 
 
             <tr>
-                <td className="customTitleOrderList-1">{index + 1}</td>
+                <td ><p className="customTitleOrderList-1">{index + 1}</p></td>
                 <td>
 
                     {order.orderItems.map((data) => (
@@ -33,7 +33,7 @@ const OrderList = (props) => {
 
 
 
-                <td className="customTitleOrderList-1"> {order.totalPrice}</td>
+                <td ><p className="customTitleOrderList-1"> ${order.totalPrice}</p></td>
                 <td className="customTitleOrderList-1"> <Button onClick={() => customButton(order._id)}>View Order Details</Button></td>
                 <td className="customTitleOrderList-1"> {order.orderStatus}</td>
             </tr>

@@ -1,16 +1,26 @@
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Button, Col, Container } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import './OrderCompleted.css'
 
-const OrderCompleted=()=>{
 
+const OrderCompleted = () => {
+
+    const navigate = useNavigate();
+
+    const goToOrders = () => {
+        navigate("/profile/orders");
+    }
 
     return (
         <Fragment>
-            <div className="customContainer">
-                <h1>Ordered </h1>
-                <Link to="/profile/orders">View Orders</Link>
-                <Link to="/">Home</Link>
-            </div>
+            <Container className="customContainerOrder-1">
+                <p className="customTitle-1-1-1">Your Order was Placed Successfully</p>
+                <Col>
+                    <Button className="customTitle-1-7-1 shadow-none" onClick={goToOrders}>View Orders</Button>
+                </Col>
+
+            </Container>
         </Fragment>
     )
 }
