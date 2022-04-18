@@ -1,6 +1,6 @@
 
 import Header from "./component/common/Header/Header"
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import Footer from './component/common/Footer/Footer';
 import Home from './component/Home/Home'
@@ -9,7 +9,7 @@ import Products from "./component/Products/Products"
 import Login from './component/Login/Login'
 import Register from "./component/Register/Register";
 import { useDispatch, useSelector } from "react-redux";
-import {loadUser}  from "./actions/userAction"
+import { loadUser } from "./actions/userAction"
 import Profile from './component/Profile/Profile'
 import Protected from "./component/ProtectedRoute/Protected";
 import UpdateProfile from "./component/Profile/UpdateProfile";
@@ -37,11 +37,11 @@ import UserUpdate from "./component/Admin/UserUpdate";
 
 function App() {
   const dispatch = useDispatch();
-  const {isAuthenticated,error,user} =useSelector((state)=>state.user)
+  const { isAuthenticated, error, user } = useSelector((state) => state.user)
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(loadUser());
-  },[dispatch])
+  }, [dispatch])
 
   return (
     <Router>
@@ -60,41 +60,44 @@ function App() {
 
         <Route path="/register" element={<Register />} />
 
-        <Route exact  path="/profile" element={<Protected  > <Profile/></Protected>}/>
+        <Route exact path="/profile" element={<Protected  > <Profile /></Protected>} />
 
-        <Route exact  path="/profile/update" element={<Protected  > <UpdateProfile /></Protected>}/>
+        <Route exact path="/profile/update" element={<Protected  > <UpdateProfile /></Protected>} />
 
-        <Route exact path="/profile/password/update" element={<Protected   > <UpdatePassword /></Protected>}/>
+        <Route exact path="/profile/password/update" element={<Protected   > <UpdatePassword /></Protected>} />
 
-        <Route exact path="/cart" element={ <Cart/>}/>
+        <Route exact path="/cart" element={<Cart />} />
 
-        <Route exact path="/shipping" element={<Protected  > <Shipping/></Protected>}/>
+        <Route exact path="/shipping" element={<Protected  > <Shipping /></Protected>} />
 
-        <Route exact path="/order/confirm" element={<Protected  > <Order/></Protected>}/>
+        <Route exact path="/order/confirm" element={<Protected  > <Order /></Protected>} />
 
-        <Route exact path="/order/paymentInfo" element={<Protected  > <OrderPaymentInfo/></Protected>}/>
+        <Route exact path="/order/paymentInfo" element={<Protected  > <OrderPaymentInfo /></Protected>} />
 
-        <Route exact path="/order/success" element={<Protected  > <OrderCompleted/></Protected>}/>
-        
-        <Route exact path="/profile/orders" element={<Protected  > <UserOrders/></Protected>}/>
+        <Route exact path="/order/success" element={<Protected  > <OrderCompleted /></Protected>} />
 
-        <Route exact path="/profile/order/:id" element={<Protected  > <OrderDetails/></Protected>}/>
+        <Route exact path="/profile/orders" element={<Protected  > <UserOrders /></Protected>} />
 
-        <Route exact path="/admin/dashboard" element={<Protected adminRoute={true} > <AdminDashboard/></Protected>}/>
+        <Route exact path="/profile/order/:id" element={<Protected  > <OrderDetails /></Protected>} />
 
-        <Route exact path="/admin/products/all" element={<Protected adminRoute={true} > <ProductPage/></Protected>}/>
-        
-        <Route exact path="/admin/orders/all" element={<Protected adminRoute={true} > <OrderPage/></Protected>}/>
+        <Route exact path="/admin/dashboard" element={<Protected adminRoute={true} > <AdminDashboard /></Protected>} />
 
-        <Route exact path="/admin/users/all" element={<Protected adminRoute={true} > <UsersPage/></Protected>}/>
+        <Route exact path="/admin/products/all" element={<Protected adminRoute={true} > <ProductPage /></Protected>} />
 
-        <Route exact path="/admin/product/:id" element={<Protected adminRoute={true} > <ProductUpdate/></Protected>}/>
+        <Route exact path="/admin/orders/all" element={<Protected adminRoute={true} > <OrderPage /></Protected>} />
 
-        <Route exact path="/admin/product/new" element={<Protected adminRoute={true} > <ProductCreate/></Protected>}/>
+        <Route exact path="/admin/users/all" element={<Protected adminRoute={true} > <UsersPage /></Protected>} />
 
-        <Route exact path="/admin/order/:id" element={<Protected adminRoute={true} > <OrderUpdate/></Protected>}/>
+        <Route exact path="/admin/product/:id" element={<Protected adminRoute={true} > <ProductUpdate /></Protected>} />
 
-        <Route exact path="/admin/user/:id" element={<Protected adminRoute={true} > <UserUpdate/></Protected>}/>
+        <Route exact path="/admin/product/new" element={<Protected adminRoute={true} > <ProductCreate /></Protected>} />
+
+        <Route exact path="/admin/order/:id" element={<Protected adminRoute={true} > <OrderUpdate /></Protected>} />
+
+        <Route exact path="/admin/user/:id" element={<Protected adminRoute={true} > <UserUpdate /></Protected>} />
+
+        <Route path="*" element={<Navigate replace to="/" />} />
+
       </Routes>
       <Footer />
     </Router>
