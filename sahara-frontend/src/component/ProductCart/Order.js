@@ -32,7 +32,7 @@ const Order = () => {
         }
         sessionStorage.setItem("orderInfo", JSON.stringify(order));
 
-        navigate("/order/paymentInfo")
+        navigate("/order/paymentInfo",{replace:true})
     }
 
     const ProductNavigate = (id) => {

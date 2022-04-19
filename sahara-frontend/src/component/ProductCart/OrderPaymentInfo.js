@@ -64,7 +64,7 @@ const OrderPaymentInfo = () => {
 
             dispatch(newOrder(data))
 
-            navigate("/order/success")
+            navigate("/order/success",{replace:true})
 
         }
 

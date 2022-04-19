@@ -132,7 +132,7 @@ const Shipping = () => {
             }
             dispatch(addUserAddress(data))
 
-            navigate("/order/confirm")
+            navigate("/order/confirm",{replace:true})
         }
 
 

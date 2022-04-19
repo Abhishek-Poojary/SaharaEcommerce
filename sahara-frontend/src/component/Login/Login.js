@@ -45,7 +45,7 @@ const Login = () => {
             if (!newPath)
                 navigate("/profile");
             else
-                navigate("/shipping");
+                navigate("/shipping",{replace:true});
         }
         if (email && email !== "" && error) {
             setLoginError("Wrong Email or Password")

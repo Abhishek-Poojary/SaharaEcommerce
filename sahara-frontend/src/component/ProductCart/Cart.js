@@ -32,6 +32,7 @@ const Cart = () => {
 
     const checkout = () => {
         navigate("/login?redirect=shipping")
+        navigate(0)
     }
     return (
         <Fragment>
