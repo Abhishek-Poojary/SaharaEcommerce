@@ -18,7 +18,7 @@ const Order = () => {
 
     const tax = totalforProduct * 0.09;
 
-    const totalPrice = totalforProduct + tax + shippingCharges;
+    const totalPrice = Math.floor(totalforProduct + tax + shippingCharges);
 
 
 

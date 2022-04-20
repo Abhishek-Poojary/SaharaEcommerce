@@ -47,9 +47,10 @@ const ProductUpdate = () => {
         if(status){
             navigate('/admin/dashboard')
             dispatch({type:REQUEST_UPDATE_PRODUCT_ADMIN_RESET})
+            navigate(0)
         }
 
-    }, [dispatch, product]);
+    }, [dispatch, product,status]);
 
     const submitData = (e) => {
         e.preventDefault();
@@ -67,6 +68,8 @@ const ProductUpdate = () => {
         });
 
         dispatch(updateProductAdmin(id,myForm))
+
+      
     }
 
     const setProductImages = (e) => {
@@ -137,7 +140,7 @@ const ProductUpdate = () => {
                     </Form.Group>
                     <Form.Group className="mb-3" >
                         <Form.Label>Images</Form.Label>
-                        <Form.Control type="file" placeholder="category" onChange={setProductImages} multiple required />
+                        <Form.Control type="file" placeholder="category" onChange={setProductImages} multiple  />
                     </Form.Group>
 
                     <Form.Group className="mb-3" >
