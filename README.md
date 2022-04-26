@@ -88,7 +88,7 @@
 
 ### STEP 1
 ```sh
-git clone 
+git clone https://github.com/Abhishek-Poojary/SaharaEcommerce.git
 ```
 
 ### STEP 2
