@@ -49,7 +49,7 @@
 
 ### Products Page
 
-![image](https://user-images.githubusercontent.com/101885586/165221263-6b538e1d-2090-4f3e-bace-8e3548d1fe31.png
+![image](https://user-images.githubusercontent.com/101885586/165221263-6b538e1d-2090-4f3e-bace-8e3548d1fe31.png)
 
 ### Product Detail Page
 
