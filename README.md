@@ -25,20 +25,20 @@
 <ul>
 <li>	Product DashBoard 
     <ul>
-		  <li>Add Product </li>
-		 <li>  delete Product
+	<li>Add Product </li>
+	<li>delete Product
     </ul>
  </li>
 <li>	User DashBoard
     <ul>
-	 <li>	  delete User </li>
-	 <li>	  update User Role </li>
+	 <li>delete User </li>
+	 <li>update User Role </li>
     </ul>
   </li>
 <li>	Order DashBoard
     <ul>
-		   <li>Update Order Status</li>
-		  <li> View Order Details</li>
+	<li>Update Order Status</li>
+	<li> View Order Details</li>
     </ul>
   </li>
 </ul>
@@ -94,31 +94,37 @@ git clone https://github.com/Abhishek-Poojary/SaharaEcommerce.git
 ### STEP 2
 Run npm install inside Sahara-backend and sahara-frontend for node_modules
 ```sh
+cd sahara-backend
 npm i 
 ```
-
+```sh
+cd sahara-frontend
+npm i 
+```
 ### STEP 3
 create a .env file inside sahara-backend and add the below mentioned env variables and values in it
 ```sh
 PORT=4000
-JSONWEBTOKEN_KEY=FKJBNFLDLDNLSBNFLBDLBFLDBLVFKVDJSWDLO // change this according to you
-JSONWEBTOKEN_EXPIRE=3d
-COOKIE_EXPIRES=1
+JSONWEBTOKEN_KEY=FKJBNFLDLDNLSBNFLBDLBFLDBLVFKVDJSWDLO  // you can change 
+JSONWEBTOKEN_EXPIRE=3d // you can change 
+COOKIE_EXPIRES=1 // you can change 
 CLOUD_NAME=
 CLOUD_KEY=
 CLOUD_SECRET=
 ```
 
-### ClOUD_NAME,CLOUD_KEY,CLOUD_SECRET- create a account in cloudinary and update the values in .env
+#### ClOUD_NAME,CLOUD_KEY,CLOUD_SECRET- create a account in cloudinary and update the values in .env
 
 ### STEP 4
-open 2 terminals
-on first terminal run the following cmds in sequence
+open 2 terminals<br>
+on first terminal<br>
+run the following cmds in sequence
 ```sh
 	cd sahara-backend
 	npm run nodemon
 ```
-on second terminal run the following cmds in sequence
+on second terminal<br>
+run the following cmds in sequence
 ```sh
 	cd sahara-frontend
 	npm start
